@@ -12,12 +12,10 @@ const service = {
     await axiosInstance.post("/auth/signup", userCredentials),
   login: async (userCredentials) =>
     await axiosInstance.post("/auth/login", userCredentials),
-  // home: async () => await axiosInstance.get("/"),
   logout: async () => await axiosInstance.get("/auth/logout"),
   isAuthenticated: async () => await axiosInstance.get("/auth/isAuthenticated"),
   // get info for all the celebrities,
-  getAllCelebrities: async () => await axiosInstance.get("/celebrities"),
-
+  // getAllCelebrities: async () => await axiosInstance.get("/celebrities"),
 };
 
 export default service;

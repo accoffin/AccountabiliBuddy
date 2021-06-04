@@ -25,14 +25,15 @@ class App extends React.Component {
   };
 
   render() {
+    console.log("this is user data from app.js", this.state.user)
     return (
       <div className="App">
-        <NavBar user={this.state.user} />
+        <NavBar user={this.state.user} setUser={this.setUser} />
         <Switch>
-          <Route path="/" render={(props) => <Landing {...props} />}/>
-          <Route path="/auth/signup" render={(props) => <Signup {...props} />} />
-          <Route path="/auth/login" render={(props) => <Login {...props} setUser={this.setUser} />}/>
-          <Route path="/dashboard" render={(props) => <Dashboard {...props} />}/>
+          <Route exact path="/" render={(props) => <Landing {...props} />}/>
+          <Route exact path="/auth/signup" render={(props) => <Signup {...props} />} />
+          <Route exact path="/auth/login" render={(props) => <Login {...props} setUser={this.setUser} />}/>
+          <Route exact path="/dashboard" render={(props) => <Dashboard {...props} />}/>
         </Switch>
       </div>
     );
