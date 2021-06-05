@@ -14,8 +14,7 @@ const service = {
     await axiosInstance.post("/auth/login", userCredentials),
   logout: async () => await axiosInstance.get("/auth/logout"),
   isAuthenticated: async () => await axiosInstance.get("/auth/isAuthenticated"),
-  // get info for all the celebrities,
-  // getAllCelebrities: async () => await axiosInstance.get("/celebrities"),
+  getDashboardRoot: async () => await axiosInstance.get("/dashboard"),
 };
 
 export default service;
