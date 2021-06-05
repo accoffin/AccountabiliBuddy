@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Link } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 // components
@@ -8,6 +8,7 @@ import Login from "./components/auth/Login";
 import NavBar from "./components/navbar/NavBar";
 import Dashboard from "./components/dashboard/Dashboard";
 import Landing from "./components/landing/Landing";
+import PersistentDrawer from "./components/persistentDrawer/PersistentDrawer";
 
 class App extends React.Component {
   state = {
@@ -28,7 +29,7 @@ class App extends React.Component {
         <Route
           path="/"
           render={(props) => (
-            <NavBar {...props} user={this.state.user} setUser={this.setUser} />
+            <PersistentDrawer {...props} user={this.state.user} setUser={this.setUser} />
           )}
         />
         <Switch>
