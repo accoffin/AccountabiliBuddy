@@ -1,27 +1,20 @@
 import React, { Component } from 'react'
 import "./Dashboard.css"
-import PersistentDrawer from '../persistentDrawer/PersistentDrawer'
 import service from '../../utils/service'
 
 export default class Dashboard extends Component {
   componentDidMount() {
     const responseFromAPI = service.getDashboardRoot();
-    console.log("response form backend API", responseFromAPI);
+    console.log("dashboard: response from backend API", responseFromAPI);
   }
-
-    componentDidMount(){
-        const responseFromAPI = service.getDashboardRoot()
-        console.log("response form backend API", responseFromAPI)
-    }
     
-    render() {
+  render() {
+        console.log("props from dashboard", this.props.goal)
         return (
             <>
             <div id="dashboard-main">
                 This is the dashboard!
-                {/* <PersistentDrawer>
-
-                </PersistentDrawer> */}
+                {this.props}
             </div>
             </>
         )

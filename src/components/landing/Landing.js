@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import "./Landing.css"
-import Navbar from '../navbar/NavBar'
 
 export default class Landing extends Component {
     render() {

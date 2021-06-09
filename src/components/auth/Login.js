@@ -13,6 +13,7 @@ export default class Signup extends Component {
       console.log("response on Login", responseFromServer)
       const { user } = responseFromServer.data;
       this.props.setUser(user);
+      this.props.history.push("/dashboard");
     });
   };
   changeHandler = (e) => {

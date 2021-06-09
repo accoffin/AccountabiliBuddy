@@ -1,12 +1,9 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
-// components
-// import service from "./utils/service";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import NavBar from "./components/navbar/NavBar";
-import Dashboard from "./components/dashboard/Dashboard";
 import Landing from "./components/landing/Landing";
 import PersistentDrawer from "./components/persistentDrawer/PersistentDrawer";
 
@@ -47,7 +44,7 @@ class App extends React.Component {
           <Route
             exact
             path="/dashboard"
-            render={(props) => <PersistentDrawer {...props} />}
+            render={(props) => <PersistentDrawer {...props} setUser={this.setUser} />}
           />
         </Switch>
       </div>
