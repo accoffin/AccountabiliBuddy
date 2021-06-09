@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   appBarShift: {
-    width: `calc(100px + ${drawerWidth}px)`,
+    width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
@@ -121,38 +121,7 @@ export default function PersistentDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            <div className="navbar">
-              <ul>
-                <Link to="/">
-                  <li>Home</li>
-                </Link>
-              </ul>
-              <ul>
-                {props.user && (
-                  <>
-                    <Link to="/dashboard">
-                      <li>Dashboard</li>
-                    </Link>
-                    <button to="/auth/logout" onClick={handleLogout}>
-                      <li>Logout</li>
-                    </button>
-                  </>
-                )}
-
-                {!props.user && (
-                  <>
-                    <Link to="/auth/login">
-                      <li>Login</li>
-                    </Link>
-                    <Link to="/auth/signup">
-                      <li>Signup</li>
-                    </Link>
-                  </>
-                )}
-
-                {props.user && <li>{props.user.username}</li>}
-              </ul>
-            </div>
+            Dashboard
           </Typography>
         </Toolbar>
       </AppBar>

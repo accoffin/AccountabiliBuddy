@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import service from "../../utils/service";
-import PersistentDrawer from "../persistentDrawer/PersistentDrawer";
 
 export default class NavBar extends Component {
 
@@ -10,7 +9,7 @@ export default class NavBar extends Component {
     console.log("you clicked logout");
     service.logout().then((response) => {
       this.props.setUser(null);
-      this.props.history.push("/");
+      this.props.history.push("/")
     });
   };
 
@@ -32,7 +31,6 @@ export default class NavBar extends Component {
               <button to="/auth/logout" onClick={this.handleLogout}>
                 <li>Logout</li>
               </button>
-              <PersistentDrawer></PersistentDrawer>
             </>
           )}
 
