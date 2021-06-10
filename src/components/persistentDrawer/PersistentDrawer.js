@@ -103,12 +103,11 @@ export default function PersistentDrawer(props) {
     });
   };
 
-  
-  let selectedGoal = ""
+  let selectedGoal = null;
   const handleGoalSelect = (goal) => {
     console.log(`you clicked ${goal}`);
-    selectedGoal = goal
-    console.log("this is selected Goal", selectedGoal)
+    selectedGoal = goal;
+    console.log("this is selected Goal", selectedGoal);
   };
 
   return (
@@ -187,11 +186,8 @@ export default function PersistentDrawer(props) {
           [classes.contentShift]: open,
         })}
       >
-
-      {selectedGoal &&
-        <Dashboard goal={selectedGoal}/>
-      }
-
+        {/* {selectedGoal && } */}
+        <Dashboard goal={selectedGoal} />
       </main>
     </div>
   );
