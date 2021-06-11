@@ -178,6 +178,7 @@ export default function PersistentDrawer(props) {
         <div className={classes.drawerHeader}>
           <Typography variant="h6" noWrap>
             <List>
+              <ListItem>{props.user && <p>{props.user.username}</p>}</ListItem>
               <ListItem
                 button
                 onClick={() => {
@@ -237,10 +238,23 @@ export default function PersistentDrawer(props) {
         </List>
       </Drawer>
       <main>
-        {goals && (
-          <Dashboard selectedGoal={selectedGoal} createGoal={createGoal} />
+        {props.user && (
+          <>
+            {goals && (
+              <Dashboard
+                user={props.user}
+                selectedGoal={selectedGoal}
+                createGoal={createGoal}
+              />
+            )}
+            {!goals && <h2>Create a goal!</h2>}
+          </>
         )}
-        {!goals && <h2>Create a goal!</h2>}
+        {!props.user &&
+          <>
+          {<h1>You Must Login!</h1>}
+          </>
+          }
       </main>
     </div>
   );

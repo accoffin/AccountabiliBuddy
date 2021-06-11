@@ -5,12 +5,16 @@ import UpdateGoal from "../updateGoal/UpdateGoal";
 export default function DashboardFunction(props) {
   console.log(`dashboard props: createGoal ${props.createGoal}`);
   console.log(`dashboard props: selectedGoal ${props.selectedGoal}`);
-  
+
   const renderFunction = () => {
     console.log(props.selectedGoal);
-    if (props.createGoal) return <NewGoal />;
-    if (props.selectedGoal !== null)
-      return <UpdateGoal goal={props.selectedGoal} />;
+    if (props.createGoal) {
+      return <NewGoal user={props.user} />;
+    } else if (props.selectedGoal !== null) {
+      return <UpdateGoal goal={props.selectedGoal} user={props.user} />;
+    } else {
+      return <h1>{"Click Hambuger To Begin!"}</h1>
+    }
   };
 
   return (

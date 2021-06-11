@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import Signup from "./components/auth/Signup";
@@ -7,26 +7,17 @@ import NavBar from "./components/navbar/NavBar";
 import Landing from "./components/landing/Landing";
 import PersistentDrawer from "./components/persistentDrawer/PersistentDrawer";
 
-class App extends React.Component {
-  state = {
-    // default state, we use empty array to avoid undefined errors
-    goalSets: [],
-    user: null,
-  };
+export default function App() {
+  const [user, setUser] = useState(null);
+  const updateUser = (userData) => setUser(userData);
 
-  setUser = (userData) => {
-    this.setState({
-      user: userData,
-    });
-  };
-
-  render() {
-    return (
+  return (
+    <>
       <div className="App">
         <Route
           path="/"
           render={(props) => (
-            <NavBar {...props} user={this.state.user} setUser={this.setUser} />
+            <NavBar {...props} user={user} setUser={updateUser} />
           )}
         />
         <Switch>
@@ -39,19 +30,17 @@ class App extends React.Component {
           <Route
             exact
             path="/auth/login"
-            render={(props) => <Login {...props} setUser={this.setUser} />}
+            render={(props) => <Login {...props} setUser={updateUser} />}
           />
           <Route
             exact
             path="/dashboard"
             render={(props) => (
-              <PersistentDrawer {...props} setUser={this.setUser} />
+              <PersistentDrawer {...props} user={user} setUser={updateUser} />
             )}
           />
         </Switch>
       </div>
-    );
-  }
+    </>
+  );
 }
-
-export default App;
