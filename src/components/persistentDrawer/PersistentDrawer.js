@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -19,8 +19,6 @@ import service from "../../utils/service";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Dashboard from "../dashboard/Dashboard";
-import { render } from "@testing-library/react";
-import Modal from "../modal/Modal";
 
 const drawerWidth = 240;
 
@@ -94,6 +92,8 @@ export default function PersistentDrawer(props) {
     setOpen(false);
   };
   // -------------------------------
+  //our first hook
+  const [selectedGoal, setSelectedGoal] = useState("null");
 
   const handleLogout = () => {
     console.log("you clicked logout");
@@ -103,11 +103,14 @@ export default function PersistentDrawer(props) {
     });
   };
 
-  let selectedGoal = null;
+  useEffect(() => {
+    console.log(selectedGoal)
+
+  },[selectedGoal]);
+
   const handleGoalSelect = (goal) => {
     console.log(`you clicked ${goal}`);
-    selectedGoal = goal;
-    console.log("this is selected Goal", selectedGoal);
+    setSelectedGoal(goal);
   };
 
   return (
@@ -181,13 +184,9 @@ export default function PersistentDrawer(props) {
           ))}
         </List>
       </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        {/* {selectedGoal && } */}
-        <Dashboard goal={selectedGoal} />
+      <main>
+        <Dashboard selectedGoal={selectedGoal} />
+        can you see this?
       </main>
     </div>
   );

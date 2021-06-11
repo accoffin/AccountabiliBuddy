@@ -1,22 +1,9 @@
-import React, { Component } from 'react'
-import "./Dashboard.css"
-import service from '../../utils/service'
+import React from "react";
 
-export default class Dashboard extends Component {
-  componentDidMount() {
-    const responseFromAPI = service.getDashboardRoot();
-    console.log("dashboard: response from backend API", responseFromAPI);
-  }
-    
-  render() {
-        console.log("props from dashboard", this.props.goal)
-        return (
-            <>
-            <div id="dashboard-main">
-                This is the dashboard!
-                {this.props}
-            </div>
-            </>
-        )
-    }
+export default function DashboardFunction(props) {
+  // const [selectedGoal, setSelectedGoal] = useState(props.selectedGoal);
+  console.log(`This is our hook from dashboard ${props.selectedGoal}`);
+  
+
+  return <div>This is the dashboard!</div>;
 }
