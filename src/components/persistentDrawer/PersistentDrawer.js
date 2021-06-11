@@ -91,9 +91,6 @@ export default function PersistentDrawer(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  // -------------------------------
-  //our first hook
-  const [selectedGoal, setSelectedGoal] = useState("null");
 
   const handleLogout = () => {
     console.log("you clicked logout");
@@ -103,14 +100,39 @@ export default function PersistentDrawer(props) {
     });
   };
 
-  useEffect(() => {
-    console.log(selectedGoal)
+  //use hook to define state
+  const [goals, setGoals] = useState(null);
+  const [selectedGoal, setSelectedGoal] = useState("null");
+  const [createGoal, setCreateGoal] = useState(false);
 
-  },[selectedGoal]);
+  // goals loaded on initial render only
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await service.getGoals();
+      setGoals(data.data.allGoals);
+    };
+    fetchData();
+  }, []);
+
+  //updates everytime selectedGoal is changed
+  useEffect(() => {
+    setCreateGoal(false);
+    handleDrawerClose();
+  }, [selectedGoal]);
 
   const handleGoalSelect = (goal) => {
-    console.log(`you clicked ${goal}`);
     setSelectedGoal(goal);
+  };
+
+  const handleCreateGoal = () => {
+    setCreateGoal(true);
+    handleDrawerClose();
+  };
+
+  const handleReturnToDashboard = () => {
+    setCreateGoal(false);
+    setSelectedGoal(null);
+    props.history.push("/dashboard");
   };
 
   return (
@@ -133,7 +155,14 @@ export default function PersistentDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Dashboard
+            <ListItem
+              button
+              onClick={() => {
+                handleReturnToDashboard();
+              }}
+            >
+              Goal Zone!
+            </ListItem>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -147,6 +176,18 @@ export default function PersistentDrawer(props) {
         }}
       >
         <div className={classes.drawerHeader}>
+          <Typography variant="h6" noWrap>
+            <List>
+              <ListItem
+                button
+                onClick={() => {
+                  handleCreateGoal();
+                }}
+              >
+                Create Goal!
+              </ListItem>
+            </List>
+          </Typography>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -157,20 +198,31 @@ export default function PersistentDrawer(props) {
         </div>
         <Divider />
         <List>
-          {["Goal One", "Goal Two", "Goal Three"].map((text, index) => (
-            <ListItem
-              button
-              key={text}
-              onClick={() => {
-                handleGoalSelect(text);
-              }}
-            >
-              <ListItemIcon>
-                <AssignmentTurnedInIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          {goals &&
+            goals.map((goal, index) => (
+              <ListItem
+                button
+                key={goal.name}
+                onClick={() => {
+                  handleGoalSelect(goal.name);
+                }}
+              >
+                <ListItemIcon>
+                  <AssignmentTurnedInIcon />
+                </ListItemIcon>
+                <ListItemText primary={goal.name} />
+              </ListItem>
+            ))}
+
+          {!goals &&
+            ["You don't have any goals"].map((text, index) => (
+              <ListItem key={text}>
+                <ListItemIcon>
+                  <AssignmentTurnedInIcon />
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
         </List>
         <Divider />
         <List>
@@ -185,8 +237,10 @@ export default function PersistentDrawer(props) {
         </List>
       </Drawer>
       <main>
-        <Dashboard selectedGoal={selectedGoal} />
-        can you see this?
+        {goals && (
+          <Dashboard selectedGoal={selectedGoal} createGoal={createGoal} />
+        )}
+        {!goals && <h2>Create a goal!</h2>}
       </main>
     </div>
   );

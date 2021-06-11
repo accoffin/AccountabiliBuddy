@@ -6,7 +6,6 @@ import Login from "./components/auth/Login";
 import NavBar from "./components/navbar/NavBar";
 import Landing from "./components/landing/Landing";
 import PersistentDrawer from "./components/persistentDrawer/PersistentDrawer";
-import TheContext from "./TheContext"
 
 class App extends React.Component {
   state = {
@@ -24,7 +23,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      {/* <TheContext.Provider value={{ selectedGoal, user, setUser }}> */}
         <Route
           path="/"
           render={(props) => (
@@ -46,10 +44,11 @@ class App extends React.Component {
           <Route
             exact
             path="/dashboard"
-            render={(props) => <PersistentDrawer {...props} setUser={this.setUser} />}
+            render={(props) => (
+              <PersistentDrawer {...props} setUser={this.setUser} />
+            )}
           />
         </Switch>
-        {/* </TheContext.Provider> */}
       </div>
     );
   }

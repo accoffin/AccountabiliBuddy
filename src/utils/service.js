@@ -14,7 +14,8 @@ const service = {
     await axiosInstance.post("/auth/login", userCredentials),
   logout: async () => await axiosInstance.get("/auth/logout"),
   isAuthenticated: async () => await axiosInstance.get("/auth/isAuthenticated"),
-  getDashboardRoot: async () => await axiosInstance.get("/dashboard"),
+  // getDashboardRoot: async () => await axiosInstance.get("/dashboard"),
+  getGoals: async () => await axiosInstance.get("/goals"),
 };
 
 export default service;
