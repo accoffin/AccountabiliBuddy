@@ -2,7 +2,6 @@
   height: 10vh;
   display: flex;
   justify-content: space-around;
-  background-color: blueviolet;
   color: white;
 }
 
@@ -14,7 +13,7 @@
 }
 
 .navbar a {
-  color: white;
+  color: purple;
   text-decoration: none;
   font-size: x-large;
 }

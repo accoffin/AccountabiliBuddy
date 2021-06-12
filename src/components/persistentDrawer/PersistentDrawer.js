@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -82,7 +83,6 @@ const useStyles = makeStyles((theme) => ({
 export default function PersistentDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -101,18 +101,19 @@ export default function PersistentDrawer(props) {
   };
 
   //use hook to define state
+  const [open, setOpen] = React.useState(false);
   const [goals, setGoals] = useState(null);
-  const [selectedGoal, setSelectedGoal] = useState("null");
+  const [selectedGoal, setSelectedGoal] = useState(null);
   const [createGoal, setCreateGoal] = useState(false);
 
-  // goals loaded on initial render only
+  // goals loaded from DB on initial render only
   useEffect(() => {
     const fetchData = async () => {
       const data = await service.getGoals();
       setGoals(data.data.allGoals);
     };
     fetchData();
-  }, []);
+  }, [createGoal]);
 
   //updates everytime selectedGoal is changed
   useEffect(() => {
@@ -205,7 +206,7 @@ export default function PersistentDrawer(props) {
                 button
                 key={goal.name}
                 onClick={() => {
-                  handleGoalSelect(goal.name);
+                  handleGoalSelect(goal);
                 }}
               >
                 <ListItemIcon>
@@ -242,19 +243,26 @@ export default function PersistentDrawer(props) {
           <>
             {goals && (
               <Dashboard
+                {...props}
                 user={props.user}
                 selectedGoal={selectedGoal}
                 createGoal={createGoal}
+                handleReturnToDashboard={()=>handleReturnToDashboard()}
+                goals={goals}
               />
             )}
             {!goals && <h2>Create a goal!</h2>}
           </>
         )}
-        {!props.user &&
+        {!props.user && (
           <>
-          {<h1>You Must Login!</h1>}
+            {
+              <Link to={"/auth/login"}>
+                <h1>You Must Login!</h1>
+              </Link>
+            }
           </>
-          }
+        )}
       </main>
     </div>
   );
