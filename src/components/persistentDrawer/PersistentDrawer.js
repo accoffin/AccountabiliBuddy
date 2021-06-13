@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -247,20 +246,11 @@ export default function PersistentDrawer(props) {
                 user={props.user}
                 selectedGoal={selectedGoal}
                 createGoal={createGoal}
-                handleReturnToDashboard={()=>handleReturnToDashboard()}
+                handleReturnToDashboard={() => handleReturnToDashboard()}
                 goals={goals}
               />
             )}
             {!goals && <h2>Create a goal!</h2>}
-          </>
-        )}
-        {!props.user && (
-          <>
-            {
-              <Link to={"/auth/login"}>
-                <h1>You Must Login!</h1>
-              </Link>
-            }
           </>
         )}
       </main>

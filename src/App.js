@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import Signup from "./components/auth/Signup";
@@ -6,10 +6,20 @@ import Login from "./components/auth/Login";
 import NavBar from "./components/navbar/NavBar";
 import Landing from "./components/landing/Landing";
 import PersistentDrawer from "./components/persistentDrawer/PersistentDrawer";
+import service from "./utils/service"
 
 export default function App() {
   const [user, setUser] = useState(null);
   const updateUser = (userData) => setUser(userData);
+
+  // prevents having to login on refresh
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await service.isAuthenticated();
+      setUser(data.user || {});
+    };
+    fetchData();
+  },[]);
 
   return (
     <>

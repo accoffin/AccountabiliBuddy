@@ -2,18 +2,31 @@ import React from "react";
 import NewGoal from "../newGoal/NewGoal";
 import GoalSetting from "../goalSettings/GoalSettings";
 
-export default function DashboardFunction(props) {
-  console.log(`dashboard props: createGoal ${props.createGoal}`);
-  console.log(`dashboard props: selectedGoal ${props.selectedGoal}`);
-
+export default function DashboardFunction({
+  selectedGoal,
+  user,
+  handleReturnToDashboard,
+  createGoal,
+}) {
   const renderFunction = () => {
-    console.log(props.selectedGoal);
-    if (props.createGoal) {
-      return <NewGoal user={props.user} handleReturnToDashboard={()=>props.handleReturnToDashboard()}/>;
-    } else if (props.selectedGoal !== null) {
-      return <GoalSetting goal={props.selectedGoal} user={props.user} handleReturnToDashboard={()=>props.handleReturnToDashboard()} />;
+    // conditional renders components based on props
+    if (createGoal) {
+      return (
+        <NewGoal
+          user={user}
+          handleReturnToDashboard={() => handleReturnToDashboard()}
+        />
+      );
+    } else if (selectedGoal !== null) {
+      return (
+        <GoalSetting
+          goal={selectedGoal}
+          user={user}
+          handleReturnToDashboard={() => handleReturnToDashboard()}
+        />
+      );
     } else {
-      return <h1>{"Click Hambuger To Begin!"}</h1>
+      return <h1>{"Click Hambuger To Begin!"}</h1>;
     }
   };
 

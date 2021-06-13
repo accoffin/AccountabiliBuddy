@@ -8,8 +8,7 @@ export default function UpdateGoal({ goal, handleReturnToDashboard }) {
   useEffect(() => {
     setDetails(goal);
     console.log("goal from details", goal);
-    // setEditable(!editable);
-  });
+  },[goal]);
 
   const [form, setForm] = useState({
     name: goal.name,
@@ -38,7 +37,7 @@ export default function UpdateGoal({ goal, handleReturnToDashboard }) {
   };
 
   const handleDelete = () => {
-    // create a service call to delete base on goal id
+    // create a service call to delete based on goal id
   };
 
   console.log("this is details from goal settings", details);
