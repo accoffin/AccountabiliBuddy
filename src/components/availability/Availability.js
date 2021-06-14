@@ -3,9 +3,6 @@ import "./Availability.css";
 import service from "../../utils/service";
 
 export default class Availability extends Component {
-  componentDidMount() {
-    console.log("Availability Component");
-  }
 
   render() {
     return (

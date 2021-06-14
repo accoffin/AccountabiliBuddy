@@ -92,7 +92,6 @@ export default function PersistentDrawer(props) {
   };
 
   const handleLogout = () => {
-    console.log("you clicked logout");
     service.logout().then(() => {
       props.setUser(null);
       props.history.push("/");
@@ -101,7 +100,7 @@ export default function PersistentDrawer(props) {
 
   //use hook to define state
   const [open, setOpen] = React.useState(false);
-  const [goals, setGoals] = useState(null);
+  const [goals, setGoals] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [createGoal, setCreateGoal] = useState(false);
 
@@ -109,7 +108,9 @@ export default function PersistentDrawer(props) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await service.getGoals();
-      setGoals(data.data.allGoals);
+      console.log("data from service call", data.data.goals);
+      setGoals(data.data.goals ? data.data.goals : null);
+      console.log("new goals state", goals)
     };
     fetchData();
   }, [createGoal]);
@@ -203,7 +204,7 @@ export default function PersistentDrawer(props) {
             goals.map((goal, index) => (
               <ListItem
                 button
-                key={goal.name}
+                key={goal._id}
                 onClick={() => {
                   handleGoalSelect(goal);
                 }}
@@ -238,9 +239,9 @@ export default function PersistentDrawer(props) {
         </List>
       </Drawer>
       <main>
-        {props.user && (
+        {/* {props.user && ( */}
           <>
-            {goals && (
+            {/* {goals && ( */}
               <Dashboard
                 {...props}
                 user={props.user}
@@ -249,10 +250,10 @@ export default function PersistentDrawer(props) {
                 handleReturnToDashboard={() => handleReturnToDashboard()}
                 goals={goals}
               />
-            )}
+            {/* )} */}
             {!goals && <h2>Create a goal!</h2>}
           </>
-        )}
+        {/* )} */}
       </main>
     </div>
   );

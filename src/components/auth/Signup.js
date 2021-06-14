@@ -10,7 +10,6 @@ export default class Signup extends Component {
     e.preventDefault();
     const { username, password } = this.state;
     service.signup({ username, password }).then((responseFromServer) => {
-      console.log({ responseFromServer });
     });
   };
   changeHandler = (e) => {

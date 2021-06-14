@@ -3,9 +3,6 @@ import "./Activities.css";
 import service from "../../utils/service";
 
 export default class Activities extends Component {
-  componentDidMount() {
-    console.log("Activity Component");
-  }
 
   render() {
     return (

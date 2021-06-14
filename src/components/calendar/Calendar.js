@@ -3,9 +3,6 @@ import "./Calendar.css";
 import service from "../../utils/service";
 
 export default class Calendar extends Component {
-  componentDidMount() {
-    console.log("Calendar Component");
-  }
 
   render() {
     return (

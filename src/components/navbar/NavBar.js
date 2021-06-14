@@ -6,7 +6,6 @@ import service from "../../utils/service";
 export default class NavBar extends Component {
 
   handleLogout = () => {
-    console.log("you clicked logout");
     service.logout().then((response) => {
       this.props.setUser(null);
       this.props.history.push("/")
@@ -14,7 +13,6 @@ export default class NavBar extends Component {
   };
 
   render() {
-    console.log("checking for props on nav bar", this.props);
     return (
       <div className="navbar">
         <ul>

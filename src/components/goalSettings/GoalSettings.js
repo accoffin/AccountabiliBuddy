@@ -7,7 +7,6 @@ export default function UpdateGoal({ goal, handleReturnToDashboard }) {
 
   useEffect(() => {
     setDetails(goal);
-    console.log("goal from details", goal);
   },[goal]);
 
   const [form, setForm] = useState({
@@ -40,7 +39,6 @@ export default function UpdateGoal({ goal, handleReturnToDashboard }) {
     // create a service call to delete based on goal id
   };
 
-  console.log("this is details from goal settings", details);
   return (
     <>
       {details && (
