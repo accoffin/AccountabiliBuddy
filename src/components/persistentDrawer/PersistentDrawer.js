@@ -19,6 +19,8 @@ import service from "../../utils/service";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Dashboard from "../dashboard/Dashboard";
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import ListIcon from '@material-ui/icons/List';
 
 const drawerWidth = 240;
 
@@ -103,6 +105,8 @@ export default function PersistentDrawer(props) {
   const [goals, setGoals] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [createGoal, setCreateGoal] = useState(false);
+  const [manageActivites, setManageActivites] = useState(false);
+  const [manageCalendar, setManageCalendar] = useState(false);
 
   // goals specific to user
   const fetchData = async () => {
@@ -133,6 +137,18 @@ export default function PersistentDrawer(props) {
     setCreateGoal(false);
     setSelectedGoal(null);
     props.history.push("/dashboard", { ...props.user });
+  };
+
+  const handleActivities = () => {
+    console.log("you clicked manage activites", manageActivites);
+    setManageActivites(true);
+    handleDrawerClose();
+  };
+
+  const handleCalendar = () => {
+    console.log("you clicked manage calender", manageCalendar);
+    setManageCalendar(true);
+    handleDrawerClose();
   };
 
   return (
@@ -216,7 +232,7 @@ export default function PersistentDrawer(props) {
             ))}
 
           {!goals &&
-            ["You don't have any goals"].map((text, index) => (
+            ["You don't have any goals"].map((text) => (
               <ListItem key={text}>
                 <ListItemIcon>
                   <AssignmentTurnedInIcon />
@@ -227,14 +243,26 @@ export default function PersistentDrawer(props) {
         </List>
         <Divider />
         <List>
-          {["Logout"].map((text, index) => (
-            <ListItem button key={text} onClick={handleLogout}>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button onClick={handleActivities}>
+            <ListItemIcon>
+              <ListIcon />
+            </ListItemIcon>
+            <ListItemText>Activities</ListItemText>
+          </ListItem>
+
+          <ListItem button onClick={handleCalendar}>
+            <ListItemIcon>
+            <CalendarTodayIcon/>
+            </ListItemIcon>
+            <ListItemText>Calendar</ListItemText>
+          </ListItem>
+          <Divider />
+          <ListItem button onClick={handleLogout}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText>Logout</ListItemText>
+          </ListItem>
         </List>
       </Drawer>
       <main>
