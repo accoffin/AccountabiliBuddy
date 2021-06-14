@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import service from "../../utils/service";
 
-export default function NewGoal({ user, handleReturnToDashboard }) {
+export default function NewGoal({ user, handleReturnToDashboard, setGoals }) {
   const [form, setForm] = useState({
     name: "",
     startDate: "",
@@ -13,8 +13,10 @@ export default function NewGoal({ user, handleReturnToDashboard }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    service.createGoal(form)
-    handleReturnToDashboard()
+    service.createGoal(form).then((response) => {
+      setGoals(response.data.goals);
+      handleReturnToDashboard();
+    });
   };
 
   const changeHandler = (e) => {

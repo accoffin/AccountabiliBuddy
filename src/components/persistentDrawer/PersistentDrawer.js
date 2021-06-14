@@ -19,8 +19,8 @@ import service from "../../utils/service";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Dashboard from "../dashboard/Dashboard";
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import ListIcon from '@material-ui/icons/List';
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import ListIcon from "@material-ui/icons/List";
 
 const drawerWidth = 240;
 
@@ -252,7 +252,7 @@ export default function PersistentDrawer(props) {
 
           <ListItem button onClick={handleCalendar}>
             <ListItemIcon>
-            <CalendarTodayIcon/>
+              <CalendarTodayIcon />
             </ListItemIcon>
             <ListItemText>Calendar</ListItemText>
           </ListItem>
@@ -274,7 +274,7 @@ export default function PersistentDrawer(props) {
             user={props.user}
             selectedGoal={selectedGoal}
             createGoal={createGoal}
-            handleReturnToDashboard={() => handleReturnToDashboard()}
+            handleReturnToDashboard={handleReturnToDashboard}
             goals={goals}
             setGoals={setGoals}
           />

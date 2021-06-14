@@ -21,10 +21,23 @@ export default function UpdateGoal({
     activities: goal.activities ? goal.activities : `undefined`,
     achievements: goal.achievements ? goal.achievements : `undefined`,
     user: goal.user[0],
+    completed: goal.completed,
   });
 
   const handleEdit = () => {
     setEditable(!editable);
+  };
+
+  const handleComplete = () => {
+    service.completedGoal({ goalId: goal._id }).then((response) => {
+      // update goals state instead of recalling service call from Persistant Drawer
+      // find which goal is pointed at the same place in storage, then update that goal
+      const updateGoals = goals.map((eachGoal) =>
+        eachGoal === goal ? response.data.updatedGoal : eachGoal
+      );
+      setGoals(updateGoals);
+      handleReturnToDashboard();
+    });
   };
 
   const submitHandler = (e) => {
@@ -57,12 +70,15 @@ export default function UpdateGoal({
           {!editable ? (
             <>
               <div>{`Goal settings for ${goal.name}`}</div>
-              <h1>{`Name: ${goal.name}`}</h1>
+              <h2>{`Name: ${goal.name}`}</h2>
               <h2>{`Activities: `} </h2>
               {details.activities.map((activity) => {
                 return <h3 key={activity}>{activity}</h3>;
               })}
-              <button onClick={handleEdit}>Edit</button>
+              {goal.completed && <h1>Goal Complete!</h1>}
+              {!goal.completed &&
+                ((<button onClick={handleComplete}>Mark as Complete!</button>),
+                (<button onClick={handleEdit}>Edit</button>))}
             </>
           ) : (
             <div>

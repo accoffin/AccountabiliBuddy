@@ -8,7 +8,7 @@ export default function DashboardFunction({
   handleReturnToDashboard,
   createGoal,
   goals,
-  setGoals
+  setGoals,
 }) {
   const renderFunction = () => {
     // conditional renders components based on props
@@ -16,7 +16,8 @@ export default function DashboardFunction({
       return (
         <NewGoal
           user={user}
-          handleReturnToDashboard={() => handleReturnToDashboard()}
+          setGoals={setGoals}
+          handleReturnToDashboard={handleReturnToDashboard}
         />
       );
     } else if (selectedGoal !== null) {
@@ -26,7 +27,7 @@ export default function DashboardFunction({
           user={user}
           goals={goals}
           setGoals={setGoals}
-          handleReturnToDashboard={() => handleReturnToDashboard()}
+          handleReturnToDashboard={handleReturnToDashboard}
         />
       );
     } else {
