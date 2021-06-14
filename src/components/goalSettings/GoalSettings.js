@@ -43,8 +43,6 @@ export default function UpdateGoal({
   const submitHandler = (e) => {
     e.preventDefault();
     service.updateGoal({ form: form, goalId: goal._id }).then((response) => {
-      // update goals state instead of recalling service call from Persistant Drawer
-      // find which goal is pointed at the same place in storage, then update that goal
       const updateGoals = goals.map((eachGoal) =>
         eachGoal === goal ? response.data.updatedGoal : eachGoal
       );
@@ -59,8 +57,11 @@ export default function UpdateGoal({
     setForm({ ...form, [name]: value });
   };
 
-  const handleDelete = () => {
-    // create a service call to delete based on goal id
+  const handleRemoveGoal = () => {
+    service.removeGoal({ goalId: goal._id }).then((response) => {
+      setGoals(response.data.goals);
+      handleReturnToDashboard();
+    });
   };
 
   return (
@@ -117,7 +118,7 @@ export default function UpdateGoal({
                 />
                 <button>Update Goal!</button>
               </form>
-              <button onClick={handleDelete}>Delete</button>
+              <button onClick={handleRemoveGoal}>Remove</button>
             </div>
           )}
 

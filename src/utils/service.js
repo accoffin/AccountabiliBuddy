@@ -19,7 +19,7 @@ const service = {
   createGoal: async (form) => await axiosInstance.post("/goals/new", form),
   updateGoal: async ({ form, goalId }) =>
     await axiosInstance.post("/goals/update", { form: form, goalId: goalId }),
-  deleteGoal: async (goalId) => await axiosInstance.post("/goals/delete", goalId),
+  removeGoal: async (goalId) => await axiosInstance.post("/goals/remove", goalId),
   completedGoal: async (goalId) => await axiosInstance.post("/goals/completed", goalId),
 };
 
