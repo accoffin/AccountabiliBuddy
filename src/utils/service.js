@@ -16,7 +16,9 @@ const service = {
   isAuthenticated: async () => await axiosInstance.get("/auth/isAuthenticated"),
   getGoals: async () => await axiosInstance.get("/goals"),
   getGoalDetails: async () => await axiosInstance.get("/goals/:goalId"),
-  createGoal: async (form) => await axiosInstance.post("/goals/new",form),
+  createGoal: async (form) => await axiosInstance.post("/goals/new", form),
+  updateGoal: async ({ form, goalId }) =>
+    await axiosInstance.post("/goals/update", { form: form, goalId: goalId }),
 };
 
 export default service;

@@ -104,14 +104,13 @@ export default function PersistentDrawer(props) {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [createGoal, setCreateGoal] = useState(false);
 
-  // goals loaded from DB on initial render only
+  // goals specific to user
+  const fetchData = async () => {
+    const data = await service.getGoals();
+    setGoals(data.data.goals ? data.data.goals : null);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await service.getGoals();
-      console.log("data from service call", data.data.goals);
-      setGoals(data.data.goals ? data.data.goals : null);
-      console.log("new goals state", goals)
-    };
     fetchData();
   }, [createGoal]);
 
@@ -133,7 +132,7 @@ export default function PersistentDrawer(props) {
   const handleReturnToDashboard = () => {
     setCreateGoal(false);
     setSelectedGoal(null);
-    props.history.push("/dashboard");
+    props.history.push("/dashboard", { ...props.user });
   };
 
   return (
@@ -240,19 +239,20 @@ export default function PersistentDrawer(props) {
       </Drawer>
       <main>
         {/* {props.user && ( */}
-          <>
-            {/* {goals && ( */}
-              <Dashboard
-                {...props}
-                user={props.user}
-                selectedGoal={selectedGoal}
-                createGoal={createGoal}
-                handleReturnToDashboard={() => handleReturnToDashboard()}
-                goals={goals}
-              />
-            {/* )} */}
-            {!goals && <h2>Create a goal!</h2>}
-          </>
+        <>
+          {/* {goals && ( */}
+          <Dashboard
+            {...props}
+            user={props.user}
+            selectedGoal={selectedGoal}
+            createGoal={createGoal}
+            handleReturnToDashboard={() => handleReturnToDashboard()}
+            goals={goals}
+            setGoals={setGoals}
+          />
+          {/* )} */}
+          {!goals && <h2>Create a goal!</h2>}
+        </>
         {/* )} */}
       </main>
     </div>

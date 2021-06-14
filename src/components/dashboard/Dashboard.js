@@ -7,6 +7,8 @@ export default function DashboardFunction({
   user,
   handleReturnToDashboard,
   createGoal,
+  goals,
+  setGoals
 }) {
   const renderFunction = () => {
     // conditional renders components based on props
@@ -22,6 +24,8 @@ export default function DashboardFunction({
         <GoalSetting
           goal={selectedGoal}
           user={user}
+          goals={goals}
+          setGoals={setGoals}
           handleReturnToDashboard={() => handleReturnToDashboard()}
         />
       );

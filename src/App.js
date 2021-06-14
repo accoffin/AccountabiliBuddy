@@ -16,7 +16,7 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await service.isAuthenticated();
-      setUser(data.user || {});
+      setUser(data.data.user || {});
     };
     fetchData();
   },[]);

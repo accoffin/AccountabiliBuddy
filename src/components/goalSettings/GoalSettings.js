@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import service from "../../utils/service";
 
-export default function UpdateGoal({ goal, handleReturnToDashboard }) {
+export default function UpdateGoal({
+  goal,
+  handleReturnToDashboard,
+  goals,
+  setGoals,
+}) {
   const [editable, setEditable] = useState(false);
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
     setDetails(goal);
-  },[goal]);
+  }, [goal]);
 
   const [form, setForm] = useState({
-    name: goal.name,
-    startDate: goal.startDate,
-    endDate: goal.endDate,
-    activities: goal.activities,
-    achievements: goal.achievements,
-    user: goal.user,
+    name: goal.name ? goal.name : `undefined`,
+    startDate: goal.startDate ? goal.startDate : "",
+    endDate: goal.endDate ? goal.endDate : "",
+    activities: goal.activities ? goal.activities : `undefined`,
+    achievements: goal.achievements ? goal.achievements : `undefined`,
+    user: goal.user[0],
   });
 
   const handleEdit = () => {
@@ -24,9 +29,15 @@ export default function UpdateGoal({ goal, handleReturnToDashboard }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // create a service to update DB
-    service.updateGoal(form);
-    handleReturnToDashboard();
+    service.updateGoal({ form: form, goalId: goal._id }).then((response) => {
+      // update goals state instead of recalling service call from Persistant Drawer
+      // find which goal is pointed at the same place in storage, then update that goal
+      const updateGoals = goals.map((eachGoal) =>
+        eachGoal === goal ? response.data.updatedGoal : eachGoal
+      );
+      setGoals(updateGoals);
+      handleReturnToDashboard();
+    });
   };
 
   const changeHandler = (e) => {
@@ -62,12 +73,22 @@ export default function UpdateGoal({ goal, handleReturnToDashboard }) {
                   placeholder="Name of goal"
                   name="name"
                   onChange={changeHandler}
-                  value={goal.name}
+                  value={form.name}
                 />
                 <label htmlFor="startDate">Select Goal Start Date</label>
-                <input type="date" name="startDate" onChange={changeHandler} value={goal.startDate}/>
+                <input
+                  type="date"
+                  name="startDate"
+                  onChange={changeHandler}
+                  value={form.startDate}
+                />
                 <label htmlFor="endDate">Select Goal End Date</label>
-                <input type="date" name="endDate" onChange={changeHandler} value={goal.endDate} />
+                <input
+                  type="date"
+                  name="endDate"
+                  onChange={changeHandler}
+                  value={form.endDate}
+                />
                 <label htmlFor="activities">
                   Select Activities to accomplish your goal!
                 </label>
@@ -76,7 +97,7 @@ export default function UpdateGoal({ goal, handleReturnToDashboard }) {
                   placeholder="activities"
                   name="activities"
                   onChange={changeHandler}
-                  value={goal.activities}
+                  value={form.activities}
                 />
                 <button>Update Goal!</button>
               </form>
