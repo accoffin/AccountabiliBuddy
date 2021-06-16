@@ -22,7 +22,7 @@ const service = {
   removeGoal: async (goalId) =>
     await axiosInstance.post("/goals/remove", goalId),
   getActivitiesAPI: async (form) =>
-    await axiosInstance.get("/activities/api", form),
+    await axiosInstance.get(`/activities/api?city=${form.city}&state=${form.state}&query=${form.query}`),
   saveSelectedActivityFromApi: async (selectedActivity) =>
     await axiosInstance.post("/activities/save", selectedActivity),
   getSavedActivitiesFromAPI: async () => await axiosInstance.get("/activities"),

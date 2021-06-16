@@ -36,7 +36,7 @@ export default function UpdateGoal({
         eachGoal === goal ? response.data.updatedGoal : eachGoal
       );
       setGoals(updateGoals);
-      handleReturnToDashboard();
+      // handleReturnToDashboard();
     });
   };
 
@@ -76,15 +76,14 @@ export default function UpdateGoal({
               {details.activities.map((activity) => {
                 return <h3 key={activity}>{activity}</h3>;
               })}
-              {goal.completed ?
+              {goal.completed ? (
                 <h1>Goal Complete!</h1>
-                :
-                (
-                  <>
+              ) : (
+                <>
                   <button onClick={handleComplete}>Mark as Complete!</button>
                   <button onClick={handleEdit}>Edit</button>
-                  </>
-                )}
+                </>
+              )}
             </>
           ) : (
             <div>
