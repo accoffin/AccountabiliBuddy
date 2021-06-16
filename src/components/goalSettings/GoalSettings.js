@@ -29,7 +29,7 @@ export default function UpdateGoal({
   };
 
   const handleComplete = () => {
-    service.completedGoal({ goalId: goal._id }).then((response) => {
+    service.completeGoal({ goalId: goal._id }).then((response) => {
       // update goals state instead of recalling service call from Persistant Drawer
       // find which goal is pointed at the same place in storage, then update that goal
       const updateGoals = goals.map((eachGoal) =>
@@ -60,8 +60,8 @@ export default function UpdateGoal({
   const handleRemoveGoal = () => {
     service.removeGoal({ goalId: goal._id }).then((response) => {
       setGoals(response.data.goals);
-      handleReturnToDashboard();
     });
+    handleReturnToDashboard();
   };
 
   return (
@@ -76,10 +76,15 @@ export default function UpdateGoal({
               {details.activities.map((activity) => {
                 return <h3 key={activity}>{activity}</h3>;
               })}
-              {goal.completed && <h1>Goal Complete!</h1>}
-              {!goal.completed &&
-                ((<button onClick={handleComplete}>Mark as Complete!</button>),
-                (<button onClick={handleEdit}>Edit</button>))}
+              {goal.completed ?
+                <h1>Goal Complete!</h1>
+                :
+                (
+                  <>
+                  <button onClick={handleComplete}>Mark as Complete!</button>
+                  <button onClick={handleEdit}>Edit</button>
+                  </>
+                )}
             </>
           ) : (
             <div>

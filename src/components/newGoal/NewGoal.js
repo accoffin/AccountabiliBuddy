@@ -11,9 +11,9 @@ export default function NewGoal({ user, handleReturnToDashboard, setGoals }) {
     user: user._id,
   });
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    service.createGoal(form).then((response) => {
+    await service.createGoal(form).then((response) => {
       setGoals(response.data.goals);
       handleReturnToDashboard();
     });

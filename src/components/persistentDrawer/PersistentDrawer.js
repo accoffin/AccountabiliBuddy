@@ -21,6 +21,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Dashboard from "../dashboard/Dashboard";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ListIcon from "@material-ui/icons/List";
+import DoneIcon from "@material-ui/icons/Done";
 
 const drawerWidth = 240;
 
@@ -81,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawer(props) {
+export default function PersistentDrawer({ user, setUser, history }) {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -95,18 +96,21 @@ export default function PersistentDrawer(props) {
 
   const handleLogout = () => {
     service.logout().then(() => {
-      props.setUser(null);
-      props.history.push("/");
+      setUser(null);
+      history.push("/");
     });
   };
 
   //use hook to define state
   const [open, setOpen] = React.useState(false);
   const [goals, setGoals] = useState([]);
+  const [completedGoals, setCompletedGoals] = useState([]);
+  const [activeGoals, setActiveGoals] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [createGoal, setCreateGoal] = useState(false);
-  const [manageActivites, setManageActivites] = useState(false);
+  const [manageActivities, setManageActivities] = useState(false);
   const [manageCalendar, setManageCalendar] = useState(false);
+  const [manageCompletedGoals, setManageCompletedGoals] = useState(false);
 
   // goals specific to user
   const fetchData = async () => {
@@ -117,6 +121,13 @@ export default function PersistentDrawer(props) {
   useEffect(() => {
     fetchData();
   }, [createGoal]);
+
+  useEffect(() => {
+    const active = goals.filter((goal) => goal.completed !== true);
+    const completed = goals.filter((goal) => goal.completed === true);
+    setActiveGoals(active);
+    setCompletedGoals(completed);
+  }, [goals]);
 
   //updates everytime selectedGoal is changed
   useEffect(() => {
@@ -136,18 +147,36 @@ export default function PersistentDrawer(props) {
   const handleReturnToDashboard = () => {
     setCreateGoal(false);
     setSelectedGoal(null);
-    props.history.push("/dashboard", { ...props.user });
+    setManageActivities(false);
+    setManageCompletedGoals(false);
+    history.push("/dashboard", { ...user });
   };
 
   const handleActivities = () => {
-    console.log("you clicked manage activites", manageActivites);
-    setManageActivites(true);
+    setManageActivities(true);
+    setCreateGoal(false);
+    setSelectedGoal(null);
+    setManageCompletedGoals(false);
+    setManageCalendar(false);
     handleDrawerClose();
   };
 
   const handleCalendar = () => {
     console.log("you clicked manage calender", manageCalendar);
     setManageCalendar(true);
+    setCreateGoal(false);
+    setSelectedGoal(null);
+    setManageActivities(false);
+    setManageCompletedGoals(false);
+    handleDrawerClose();
+  };
+
+  const handleCompletedGoals = () => {
+    setManageCompletedGoals(true);
+    setManageCalendar(true);
+    setCreateGoal(false);
+    setSelectedGoal(null);
+    setManageActivities(false);
     handleDrawerClose();
   };
 
@@ -194,7 +223,8 @@ export default function PersistentDrawer(props) {
         <div className={classes.drawerHeader}>
           <Typography variant="h6" noWrap>
             <List>
-              <ListItem>{props.user && <p>{props.user.username}</p>}</ListItem>
+              <ListItem>{user && <p>{user.username}</p>}</ListItem>
+              <Divider />
               <ListItem
                 button
                 onClick={() => {
@@ -213,10 +243,9 @@ export default function PersistentDrawer(props) {
             )}
           </IconButton>
         </div>
-        <Divider />
         <List>
-          {goals &&
-            goals.map((goal, index) => (
+          {activeGoals ? (
+            activeGoals.map((goal) => (
               <ListItem
                 button
                 key={goal._id}
@@ -229,17 +258,15 @@ export default function PersistentDrawer(props) {
                 </ListItemIcon>
                 <ListItemText primary={goal.name} />
               </ListItem>
-            ))}
-
-          {!goals &&
-            ["You don't have any goals"].map((text) => (
-              <ListItem key={text}>
-                <ListItemIcon>
-                  <AssignmentTurnedInIcon />
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            ))
+          ) : (
+            <ListItem>
+              <ListItemIcon>
+                <ListIcon />
+              </ListItemIcon>
+              <ListItemText>No Active Goals</ListItemText>
+            </ListItem>
+          )}
         </List>
         <Divider />
         <List>
@@ -256,6 +283,14 @@ export default function PersistentDrawer(props) {
             </ListItemIcon>
             <ListItemText>Calendar</ListItemText>
           </ListItem>
+
+          <ListItem button onClick={handleCompletedGoals}>
+            <ListItemIcon>
+              <DoneIcon />
+            </ListItemIcon>
+            <ListItemText>Completed Goals</ListItemText>
+          </ListItem>
+
           <Divider />
           <ListItem button onClick={handleLogout}>
             <ListItemIcon>
@@ -266,22 +301,23 @@ export default function PersistentDrawer(props) {
         </List>
       </Drawer>
       <main>
-        {/* {props.user && ( */}
         <>
-          {/* {goals && ( */}
           <Dashboard
-            {...props}
-            user={props.user}
+            // {...props}
+            user={user}
             selectedGoal={selectedGoal}
             createGoal={createGoal}
             handleReturnToDashboard={handleReturnToDashboard}
             goals={goals}
             setGoals={setGoals}
+            manageActivities={manageActivities}
+            setManageActivities={setManageActivities}
+            manageCompletedGoals={manageCompletedGoals}
+            setManageCompletedGoals={setManageCompletedGoals}
+            completedGoals={completedGoals}
           />
-          {/* )} */}
-          {!goals && <h2>Create a goal!</h2>}
+          {!activeGoals && <h2>Create a goal!</h2>}
         </>
-        {/* )} */}
       </main>
     </div>
   );
