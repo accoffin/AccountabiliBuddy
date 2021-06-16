@@ -312,6 +312,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
             manageCompletedGoals={manageCompletedGoals}
             completedGoals={completedGoals}
             manageCalendar={manageCalendar}
+            handleReturnToDashboard={handleReturnToDashboard}
           />
           {!activeGoals && <h2>Create a goal!</h2>}
         </>
