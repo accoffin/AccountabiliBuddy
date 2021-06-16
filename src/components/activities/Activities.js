@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Activities.css";
 import service from "../../utils/service";
+import Chart from "react-google-charts";
 
 export default function Activities() {
   const [apiResults, setApiResults] = useState([]);
   const [savedActivities, setSavedActivities] = useState([]);
+  const [dataForChart, setDataForChart] = useState([
+    ["Category", "Count From Results"],
+  ]);
   const [form, setForm] = useState({
     city: "",
     state: "",
@@ -51,6 +55,27 @@ export default function Activities() {
         return !activitiesAlreadySaved.includes(activity.assetGuid);
       });
       setApiResults(filteredActivities);
+
+      // create hashtable to analyze categories from api results
+      const hashedCategory = {};
+      for (const element in filteredActivities) {
+        const arrayOfAssetCategories =
+          filteredActivities[element].assetCategories;
+        for (const categoryObj in arrayOfAssetCategories) {
+          const categoryName =
+            arrayOfAssetCategories[categoryObj].category.categoryName;
+
+          hashedCategory[categoryName] = hashedCategory[categoryName]
+            ? (hashedCategory[categoryName] += 1)
+            : 1;
+        }
+      }
+      const hashKeys = Object.keys(hashedCategory);
+      const dataArray = [];
+      hashKeys.forEach((key) => {
+        dataArray.push([key, hashedCategory[key]]);
+      });
+      setDataForChart([...dataForChart, ...dataArray]);
     });
   };
 
@@ -62,6 +87,7 @@ export default function Activities() {
 
   return (
     <>
+      <br></br>
       <h3>My saved activities</h3>
       <div id={"saved-activity-main"}>
         {savedActivities ? (
@@ -85,53 +111,78 @@ export default function Activities() {
           </>
         )}
       </div>
+      <div>
+        <h3>My created activities</h3>
+      </div>
       <br></br>
-      <h3>Search results for activities.</h3>
+      <div>
+        {apiResults.length > 0 ? (
+          <Chart
+            width={"700px"}
+            height={"400px"}
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={dataForChart}
+            options={{
+              title: "My Goal Categories",
+            }}
+            rootProps={{ "data-testid": "1" }}
+          />
+        ) : (
+          <p>Chart Area</p>
+        )}
+      </div>
       <br></br>
-      <div id={"activity-main"}>
-        <div id="query-activities-main">
-          <form onSubmit={submitHandler}>
-            <label htmlFor="name">City</label>
-            <input
-              type="text"
-              placeholder="city"
-              name="city"
-              onChange={changeHandler}
-              value={form.city}
-            />
-            <label htmlFor="state">State</label>
-            <input
-              type="text"
-              placeholder="state"
-              name="state"
-              onChange={changeHandler}
-              value={form.state}
-            />
-            <label htmlFor="query">Keywords</label>
-            <input
-              type="text"
-              placeholder="query"
-              name="query"
-              onChange={changeHandler}
-              value={form.query}
-            />
-            <button>Search Activities!</button>
-          </form>
+      <h3>Search for activities to help you accomplish you goals!</h3>
+      <br></br>
+      <div>
+        <div>
+          <div id="query-activities-main">
+            <form onSubmit={submitHandler}>
+              <label htmlFor="name">City</label>
+              <input
+                type="text"
+                placeholder="city"
+                name="city"
+                onChange={changeHandler}
+                value={form.city}
+              />
+              <label htmlFor="state">State</label>
+              <input
+                type="text"
+                placeholder="state"
+                name="state"
+                onChange={changeHandler}
+                value={form.state}
+              />
+              <label htmlFor="query">Keywords</label>
+              <input
+                type="text"
+                placeholder="query"
+                name="query"
+                onChange={changeHandler}
+                value={form.query}
+              />
+              <button>Search Activities!</button>
+            </form>
+          </div>
         </div>
         <br></br>
-        {apiResults &&
-          apiResults.map((activity, index) => {
-            return (
-              <div
-                id={"activity-card"}
-                onClick={() => handleSelectActivity(activity)}
-                key={activity.assetGuid}
-              >
-                <p>{activity.assetName}</p>
-                <p>{activity.homePageUrlAdr}</p>
-              </div>
-            );
-          })}
+        <div id={"activity-main"}>
+          {apiResults &&
+            apiResults.map((activity, index) => {
+              return (
+                <div
+                  id={"activity-card"}
+                  onClick={() => handleSelectActivity(activity)}
+                  key={activity.assetGuid}
+                >
+                  <p>{activity.assetName}</p>
+                  <p>{activity.homePageUrlAdr}</p>
+                </div>
+              );
+            })}
+        </div>
       </div>
     </>
   );
