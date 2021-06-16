@@ -3,6 +3,7 @@ import NewGoal from "../newGoal/NewGoal";
 import GoalSetting from "../goalSettings/GoalSettings";
 import Activities from "../activities/Activities";
 import CompletedGoals from "../completedGoal/CompletedGoals";
+import Calendar from "../calendar/Calendar"
 
 export default function DashboardFunction({
   selectedGoal,
@@ -14,6 +15,7 @@ export default function DashboardFunction({
   manageActivities,
   manageCompletedGoals,
   completedGoals,
+  manageCalendar,
 }) {
   const renderFunction = () => {
     // conditional renders components based on props
@@ -39,6 +41,8 @@ export default function DashboardFunction({
       return <Activities />;
     } else if (manageCompletedGoals) {
       return <CompletedGoals completedGoals={completedGoals} />;
+    } else if (manageCalendar) {
+      return <Calendar completedGoals={completedGoals} />;
     } else {
       return <h3>{"Click Hamburger Menu To Begin!"}</h3>;
     }

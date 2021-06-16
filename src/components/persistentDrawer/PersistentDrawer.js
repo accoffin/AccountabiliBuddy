@@ -101,7 +101,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
     });
   };
 
-  //use hook to define state
+  //use hooks to define state
   const [open, setOpen] = React.useState(false);
   const [goals, setGoals] = useState([]);
   const [completedGoals, setCompletedGoals] = useState([]);
@@ -113,13 +113,13 @@ export default function PersistentDrawer({ user, setUser, history }) {
   const [manageCompletedGoals, setManageCompletedGoals] = useState(false);
 
   // goals specific to user
-  const fetchData = async () => {
+  const getGoalsFromDB = async () => {
     const data = await service.getGoals();
     setGoals(data.data.goals ? data.data.goals : null);
   };
 
   useEffect(() => {
-    fetchData();
+    getGoalsFromDB();
   }, [createGoal]);
 
   useEffect(() => {
@@ -162,7 +162,6 @@ export default function PersistentDrawer({ user, setUser, history }) {
   };
 
   const handleCalendar = () => {
-    console.log("you clicked manage calender", manageCalendar);
     setManageCalendar(true);
     setCreateGoal(false);
     setSelectedGoal(null);
@@ -307,14 +306,12 @@ export default function PersistentDrawer({ user, setUser, history }) {
             user={user}
             selectedGoal={selectedGoal}
             createGoal={createGoal}
-            handleReturnToDashboard={handleReturnToDashboard}
             goals={goals}
             setGoals={setGoals}
             manageActivities={manageActivities}
-            setManageActivities={setManageActivities}
             manageCompletedGoals={manageCompletedGoals}
-            setManageCompletedGoals={setManageCompletedGoals}
             completedGoals={completedGoals}
+            manageCalendar={manageCalendar}
           />
           {!activeGoals && <h2>Create a goal!</h2>}
         </>

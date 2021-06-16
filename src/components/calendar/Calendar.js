@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Calendar.css";
-import service from "../../utils/service";
 
 export default class Calendar extends Component {
 
