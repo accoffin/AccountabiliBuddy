@@ -5,7 +5,6 @@ import Activities from "../activities/Activities";
 import CompletedGoals from "../completedGoal/CompletedGoals";
 import Calendar from "../calendar/Calendar";
 
-
 export default function DashboardFunction({
   selectedGoal,
   user,
@@ -30,13 +29,15 @@ export default function DashboardFunction({
       );
     } else if (selectedGoal !== null) {
       return (
-        <GoalSetting
-          goal={selectedGoal}
-          user={user}
-          goals={goals}
-          setGoals={setGoals}
-          handleReturnToDashboard={handleReturnToDashboard}
-        />
+        <>
+          <GoalSetting
+            goal={selectedGoal}
+            user={user}
+            goals={goals}
+            setGoals={setGoals}
+            handleReturnToDashboard={handleReturnToDashboard}
+          />
+        </>
       );
     } else if (manageActivities) {
       return <Activities />;
@@ -52,6 +53,14 @@ export default function DashboardFunction({
   return (
     <>
       <div>{renderFunction()}</div>
+
+      {/* <savedActivitiesContext.Consumer>
+        {(value) =>
+          value.map((thing) => {
+            return <h2>{thing.assetName}</h2>;
+          })
+        }
+      </savedActivitiesContext.Consumer> */}
     </>
   );
 }
