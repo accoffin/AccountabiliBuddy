@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import service from "../../utils/service";
+import { ActivityContext } from "../../TheContext";
 
 export default function UpdateGoal({
   goal,
@@ -9,7 +10,8 @@ export default function UpdateGoal({
 }) {
   const [editable, setEditable] = useState(false);
   const [details, setDetails] = useState(null);
-
+  const { activity } = useContext(ActivityContext);
+  console.log(activity);
   useEffect(() => {
     setDetails(goal);
   }, [goal]);
@@ -70,7 +72,7 @@ export default function UpdateGoal({
         <div>
           {!editable ? (
             <>
-              <div>{`Goal settings for ${goal.name}`}</div>
+              <div>{`Goal settings for ${goal.name} ${activity}`}</div>
               <h2>{`Name: ${goal.name}`}</h2>
               <h2>{`Activities: `} </h2>
               {details.activities.map((activity) => {

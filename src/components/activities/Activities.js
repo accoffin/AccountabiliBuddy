@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Activities.css";
 import service from "../../utils/service";
 import Chart from "react-google-charts";
 import ActivityDetails from "../activityDetails/ActivityDetails";
+import { ActivityContext } from "../../TheContext";
 
 export default function Activities() {
   const [apiResults, setApiResults] = useState([]);
@@ -17,6 +18,7 @@ export default function Activities() {
     state: "",
     query: "",
   });
+  const { setActivity } = useContext(ActivityContext);
 
   useEffect(() => {
     service.getCreatedActivitiesFromDB().then((response) => {
@@ -59,6 +61,10 @@ export default function Activities() {
       setDataForChart([...dataForChart, ...dataArray]);
     });
   }, []);
+
+  useEffect(() => {
+    setActivity(["Yay"]);
+  });
 
   const handleSelectActivity = (activity) => {
     service.saveSelectedActivityFromApi(activity).then((response) => {
@@ -129,7 +135,7 @@ export default function Activities() {
   };
 
   const handleDeleteCreatedActivity = async (activityName) => {
-    console.log("activityName", activityName)
+    console.log("activityName", activityName);
     await service.deleteCreatedActivityFromDB(activityName);
     setCreatedActivities(
       createdActivities.filter(

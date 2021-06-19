@@ -1,13 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import "./Goals.css";
 import service from "../../utils/service";
+import { ActivityContext } from "../../TheContext";
 
-export default class Goals extends Component {
-  render() {
-    return (
-      <>
-        <div id="Goals-main">These are your goals!</div>
-      </>
-    );
-  }
-}
+const Goals = () => {
+  const { activity } = useContext(ActivityContext);
+
+  return (
+    <>
+      <div id="Goals-main">These are your goals! {activity}</div>
+    </>
+  );
+};
+
+export default Goals;

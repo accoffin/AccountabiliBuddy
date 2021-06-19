@@ -6,7 +6,8 @@ import Login from "./components/auth/Login";
 import NavBar from "./components/navbar/NavBar";
 import Landing from "./components/landing/Landing";
 import PersistentDrawer from "./components/persistentDrawer/PersistentDrawer";
-import service from "./utils/service"
+import service from "./utils/service";
+import { ActivityContextProvider } from "./TheContext";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -19,10 +20,10 @@ export default function App() {
       setUser(data.data.user || {});
     };
     fetchData();
-  },[]);
+  }, []);
 
   return (
-    <>
+    <ActivityContextProvider>
       <div className="App">
         <Route
           path="/"
@@ -51,6 +52,6 @@ export default function App() {
           />
         </Switch>
       </div>
-    </>
+    </ActivityContextProvider>
   );
 }
