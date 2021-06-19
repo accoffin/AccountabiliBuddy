@@ -63,8 +63,8 @@ export default function Activities() {
   }, []);
 
   useEffect(() => {
-    setActivity(["Yay"]);
-  });
+    setActivity(savedActivities);
+  },[setActivity, savedActivities]);
 
   const handleSelectActivity = (activity) => {
     service.saveSelectedActivityFromApi(activity).then((response) => {
