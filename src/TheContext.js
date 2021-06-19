@@ -1,5 +1,13 @@
-import React from 'react';
+import React, { useState, createContext } from "react";
 
+export const ActivityContext = createContext();
 
-const ThemeContext = React.createContext(null);
-export default ThemeContext;
+export const ActivityContextProvider = (props) => {
+  const [activity, setActivity] = useState([]);
+
+  return (
+    <ActivityContext.Provider value={{ activity, setActivity }}>
+      {props.children}
+    </ActivityContext.Provider>
+  );
+};
