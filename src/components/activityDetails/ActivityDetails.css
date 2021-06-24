@@ -1,0 +1,15 @@
+#formInput {
+    float: left;
+}
+
+button {
+    padding: 8px;
+    margin: 15px;
+    border: 2px solid darkgrey;
+    border-radius: 50px;
+    align-items: center;
+}
+
+label {
+    margin-left: 20px
+}

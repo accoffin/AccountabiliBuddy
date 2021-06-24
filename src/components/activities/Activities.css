@@ -19,3 +19,14 @@
     flex-wrap: wrap;
 }
 
+#h3title {
+  margin-top: 50px
+}
+
+#formLabel {
+  float: left;
+}
+
+label {
+  margin-left: 20px
+}

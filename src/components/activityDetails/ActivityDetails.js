@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import service from "../../utils/service";
+import './ActivityDetails.css';
 
 export default function ActivityDetails({
   setCreatedActivities,
@@ -27,24 +28,33 @@ export default function ActivityDetails({
 
   return (
     <>
-      <div>This is activity details.</div>
-      <form onSubmit={submitHandler}>
-        <label htmlFor="name">Name your activity:</label>
+      <div className={"reg"}>Enter the details of your activity!</div>
+      <br />
+      <form onSubmit={submitHandler}
+      className={"reg"}>
+        <label htmlFor="name"
+        id={"formInput"}>Activity Name: </label>
         <input
           type="text"
-          placeholder="name"
+          placeholder=""
           name="name"
           onChange={changeHandler}
           value={form.name}
+          style={{width: "300px", float: "right"}}
+          
         />
-        <label htmlFor="state">Describe your activity.</label>
+        <br />
+        <label htmlFor="state"
+        id={"formInput"}>Activity Description: </label>
         <input
           type="text"
-          placeholder="description"
+          placeholder=""
           name="description"
           onChange={changeHandler}
           value={form.description}
+          style={{width: "300px", float: "right"}}
         />
+        <br />
         <button>Create Activity!</button>
       </form>
     </>

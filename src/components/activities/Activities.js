@@ -148,7 +148,7 @@ export default function Activities() {
     <>
       <br></br>
       <h3>My saved activities</h3>
-      <div id={"saved-activity-main"}>
+      <div id={"saved-activity-main"} className={"reg"}>
         {savedActivities ? (
           <>
             {savedActivities.map((activity) => {
@@ -171,7 +171,8 @@ export default function Activities() {
         )}
       </div>
       <div>
-        <h3>My created activities</h3>
+        <h3 id={"h3title"} className={"bold"}>YOUR ACTIVITY LOG</h3>
+        <hr />
         <br></br>
         {createActivity ? (
           <ActivityDetails
@@ -179,7 +180,10 @@ export default function Activities() {
             setCreateActivity={setCreateActivity}
           />
         ) : (
-          <button onClick={handleCreateActivity}>Create Activity</button>
+          <div>
+          <h3 className={"bold"}>Add an activity!</h3>
+          <button onClick={handleCreateActivity} className={"reg"}>Create Activity</button>
+          </div>
         )}
         <div>
           {console.log("created activities at POU", createdActivities)}
@@ -226,37 +230,44 @@ export default function Activities() {
           <p>Chart Area</p>
         )}
       </div>
-      <br></br>
-      <h3>Search for activities to help you accomplish you goals!</h3>
-      <br></br>
-      <div>
+      <br />
+      <h3 className={"bold"}>Looking to try something new? Search our database for new activities!</h3>
+      <hr />
+      <br />
+      <div className="reg">
         <div>
           <div id="query-activities-main">
             <form onSubmit={submitHandler}>
-              <label htmlFor="name">City</label>
+              <label htmlFor="name" id={"formLabel"}>City:</label>
               <input
                 type="text"
-                placeholder="city"
+                placeholder=""
                 name="city"
                 onChange={changeHandler}
                 value={form.city}
+                style={{width: "300px", float: "right"}}
               />
-              <label htmlFor="state">State</label>
+              <br />
+              <label htmlFor="state" id={"formLabel"}>State:</label>
               <input
                 type="text"
-                placeholder="state"
+                placeholder=""
                 name="state"
                 onChange={changeHandler}
                 value={form.state}
+                style={{width: "300px", float: "right"}}
               />
-              <label htmlFor="query">Keywords</label>
+              <br />
+              <label htmlFor="query" id={"formLabel"}>Keywords:</label>
               <input
                 type="text"
-                placeholder="query"
+                placeholder=""
                 name="query"
                 onChange={changeHandler}
                 value={form.query}
+                style={{width: "300px", float: "right"}}
               />
+              <br />
               <button>Search Activities!</button>
             </form>
           </div>
