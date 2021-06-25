@@ -38,7 +38,7 @@ export default function UpdateGoal({
         eachGoal === goal ? response.data.updatedGoal : eachGoal
       );
       setGoals(updateGoals);
-      // handleReturnToDashboard();
+      handleReturnToDashboard();
     });
   };
 
