@@ -24,12 +24,13 @@ export default class Signup extends Component {
   };
   render() {
     return (
-      <form onSubmit={this.submitHandler}>
+      <form onSubmit={this.submitHandler} className={"reg"}>
         <input
           type="text"
           value={this.state.username}
           placeholder="username"
           name="username"
+          className={"reg"}
           onChange={this.changeHandler}
         />
         <input
@@ -39,7 +40,7 @@ export default class Signup extends Component {
           name="password"
           onChange={this.changeHandler}
         />
-        <button>Login</button>
+        <button className={"reg"}>Login</button>
       </form>
     );
   }

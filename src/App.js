@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import "./fonts/Raleway-Regular.ttf";
 import { Route, Switch } from "react-router-dom";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
