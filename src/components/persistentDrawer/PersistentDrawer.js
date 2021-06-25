@@ -23,6 +23,19 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ListIcon from "@material-ui/icons/List";
 import DoneIcon from "@material-ui/icons/Done";
 
+const { google } = require("googleapis");
+const { Oauth2 } = google.auth;
+
+const oAuth2Client = new Oauth2(
+  "699721081499-np2smh60bhbfvjqhrgkhk4n250376flq.apps.googleusercontent.com",
+  "qKsT6cAoKxOkm9YkDKQG5WaR"
+);
+
+oAuth2Client.setCredentials({
+  refresh_token:
+    "1//045CKKGIFS2LgCgYIARAAGAQSNwF-L9Irj__if-S3yugnNntg6AQvZuKlbrFyE0uMpiKwIkE3_bcAGoP6TgPpUd-zQxyjIR_5kVU",
+});
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
