@@ -166,7 +166,7 @@ export default function Activities() {
           </>
         ) : (
           <>
-            <h3>You have no saved activites</h3>
+            <h3 className={"reg"}>You have no saved activites</h3>
           </>
         )}
       </div>
