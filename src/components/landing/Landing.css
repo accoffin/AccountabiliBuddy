@@ -5,3 +5,8 @@
 #landing-chart {
     background-color: white
 }
+
+#landing-main li {
+    color: blue;
+    text-decoration: none;
+}
