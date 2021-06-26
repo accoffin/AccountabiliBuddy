@@ -3,6 +3,8 @@
   display: flex;
   justify-content: space-around;
   color: rgb(95, 95, 95);
+  background-color: #3f51b5;
+
 }
 
 .navbar ul {
@@ -17,3 +19,7 @@
   text-decoration: none
 }
 
+.navbar a:hover {
+  color: lightgrey;
+  text-decoration: none
+}

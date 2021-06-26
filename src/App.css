@@ -28,9 +28,9 @@
   font-size: 14px;
 }
 
-.App, html, body, .app>div {
+.App {
   text-align: center;
-  background-color: #3f51b5;
+  /* background-color: #3f51b5; */
   height: 100%
 }
 
