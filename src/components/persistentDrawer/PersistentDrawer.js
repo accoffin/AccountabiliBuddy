@@ -22,6 +22,8 @@ import Dashboard from "../dashboard/Dashboard";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ListIcon from "@material-ui/icons/List";
 import DoneIcon from "@material-ui/icons/Done";
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import ABlogo from "../../images/logo.png";
 
 const { google } = require("googleapis");
 const { Oauth2 } = google.auth;
@@ -68,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    background: 'white'
   },
   drawerHeader: {
     display: "flex",
@@ -76,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
+    background: 'white'
   },
   content: {
     flexGrow: 1,
@@ -218,13 +222,14 @@ export default function PersistentDrawer({ user, setUser, history }) {
                 handleReturnToDashboard();
               }}
             >
-              Goal Zone!
+            <img src={ABlogo} alt="AB logo" />
             </ListItem>
           </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
         className={classes.drawer}
+        background="white"
         variant="persistent"
         anchor="left"
         open={open}
@@ -232,21 +237,14 @@ export default function PersistentDrawer({ user, setUser, history }) {
           paper: classes.drawerPaper,
         }}
       >
+      
         <div className={classes.drawerHeader}>
           <Typography variant="h6" noWrap>
             <List>
-              <ListItem>{user && <p>{user.username}</p>}</ListItem>
-              <Divider />
-              <ListItem
-                button
-                onClick={() => {
-                  handleCreateGoal();
-                }}
-              >
-                Create Goal!
-              </ListItem>
+              <ListItem className={"reg"}>{user && <p>{user.username}</p>}</ListItem>
             </List>
           </Typography>
+
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -259,6 +257,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
           {activeGoals ? (
             activeGoals.map((goal) => (
               <ListItem
+                className={"reg"}
                 button
                 key={goal._id}
                 onClick={() => {
@@ -280,27 +279,66 @@ export default function PersistentDrawer({ user, setUser, history }) {
             </ListItem>
           )}
         </List>
+
+        <List>
+          <Divider />
+
+          {/* <Typography variant="h6" noWrap>
+            <List>
+              <ListItem>{user && <p>{user.username}</p>}</ListItem>
+              <Divider />
+              <ListItem
+                className={"reg"}
+                button
+                onClick={() => {
+                  handleCreateGoal();
+                }}
+              >
+                Create a Goal
+              </ListItem>
+            </List>
+          </Typography> */}
+
+          <ListItem 
+              className={"reg"}
+              button
+              onClick={() => {
+                  handleCreateGoal();
+                }} 
+            >
+            <ListItemIcon>
+              <AddBoxIcon />
+            </ListItemIcon>
+            <ListItemText disableTypography className={["reg", "big"]}>CREATE A GOAL</ListItemText>
+          </ListItem>
+        </List>
+
         <Divider />
         <List>
-          <ListItem button onClick={handleActivities}>
+          <ListItem 
+            button 
+            onClick={handleActivities}>
             <ListItemIcon>
               <ListIcon />
             </ListItemIcon>
-            <ListItemText>Activities</ListItemText>
+            <ListItemText disableTypography className={["reg", "big"]}>ACTIVITIES</ListItemText>
           </ListItem>
 
-          <ListItem button onClick={handleCalendar}>
+          <ListItem 
+            className={"reg"}
+            button 
+            onClick={handleCalendar}>
             <ListItemIcon>
               <CalendarTodayIcon />
             </ListItemIcon>
-            <ListItemText>Calendar</ListItemText>
+            <ListItemText disableTypography className={["reg", "big"]}>CALENDAR</ListItemText>
           </ListItem>
 
           <ListItem button onClick={handleCompletedGoals}>
             <ListItemIcon>
               <DoneIcon />
             </ListItemIcon>
-            <ListItemText>Completed Goals</ListItemText>
+            <ListItemText disableTypography className={["reg", "big"]}>COMPLETED GOALS</ListItemText>
           </ListItem>
 
           <Divider />
@@ -308,7 +346,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
-            <ListItemText>Logout</ListItemText>
+            <ListItemText disableTypography className={["reg", "big"]}>LOGOUT</ListItemText>
           </ListItem>
         </List>
       </Drawer>

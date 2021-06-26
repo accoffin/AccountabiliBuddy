@@ -11,7 +11,7 @@ export default function UpdateGoal({
   const [editable, setEditable] = useState(false);
   const [details, setDetails] = useState(null);
   const { activity } = useContext(ActivityContext);
-  console.log(activity);
+  console.log("this is activities", activity);
   useEffect(() => {
     setDetails(goal);
   }, [goal]);
@@ -38,7 +38,7 @@ export default function UpdateGoal({
         eachGoal === goal ? response.data.updatedGoal : eachGoal
       );
       setGoals(updateGoals);
-      // handleReturnToDashboard();
+      handleReturnToDashboard();
     });
   };
 

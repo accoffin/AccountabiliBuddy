@@ -1,3 +1,28 @@
+@font-face {
+  font-family: 'Raleway';
+  src: local('Raleway'), url(../src/fonts/Raleway-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Raleway';
+  font-weight: bold;
+  src: local('Raleway'), url(../src/fonts/Raleway-Bold.ttf);
+}
+
+.reg {
+  font-family: 'Raleway';
+}
+
+.bold {
+  font-family: 'Raleway';
+  font-weight: bold;
+}
+
+.big {
+  font-family: 'Raleway';
+  font-size: 14px;
+}
+
 .App {
   text-align: center;
 }

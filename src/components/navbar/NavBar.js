@@ -14,13 +14,13 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <div className="navbar">
-        <ul>
-          <Link to="/">
+      <div className={"navbar"}>
+        <ul className={"bold"}>
+          <Link to="/" >
             <li>Home</li>
           </Link>
         </ul>
-        <ul>
+        <ul className={"bold"}>
           {this.props.user && (
             <>
               <Link to="/dashboard">
