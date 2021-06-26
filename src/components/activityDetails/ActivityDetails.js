@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import service from "../../utils/service";
-import './ActivityDetails.css';
+import "./ActivityDetails.css";
 
 export default function ActivityDetails({
   setCreatedActivities,
   setCreateActivity,
 }) {
   const [form, setForm] = useState({
-    name: "",
+    title: "",
+    start: "",
+    end: "",
     description: "",
   });
 
@@ -30,29 +32,43 @@ export default function ActivityDetails({
     <>
       <div className={"reg"}>Enter the details of your activity!</div>
       <br />
-      <form onSubmit={submitHandler}
-      className={"reg"}>
-        <label htmlFor="name"
-        id={"formInput"}>Activity Name: </label>
+      <form onSubmit={submitHandler} className={"reg"}>
+        <label htmlFor="title" id={"formInput"}>
+          Activity Title:{" "}
+        </label>
         <input
           type="text"
           placeholder=""
-          name="name"
+          name="title"
           onChange={changeHandler}
-          value={form.name}
-          style={{width: "300px", float: "right"}}
-          
+          value={form.title}
+          style={{ width: "300px", float: "right" }}
         />
         <br />
-        <label htmlFor="state"
-        id={"formInput"}>Activity Description: </label>
+        <label htmlFor="startDate">Select Activity Start Date</label>
+        <input
+          type="date"
+          name="start"
+          onChange={changeHandler}
+          value={form.start}
+        />
+        <label htmlFor="end">Select Activity End Date</label>
+        <input
+          type="date"
+          name="end"
+          onChange={changeHandler}
+          value={form.end}
+        />
+        <label htmlFor="state" id={"formInput"}>
+          Activity Description:{" "}
+        </label>
         <input
           type="text"
           placeholder=""
           name="description"
           onChange={changeHandler}
           value={form.description}
-          style={{width: "300px", float: "right"}}
+          style={{ width: "300px", float: "right" }}
         />
         <br />
         <button>Create Activity!</button>
