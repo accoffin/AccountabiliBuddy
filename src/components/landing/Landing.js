@@ -7,8 +7,10 @@ export default class Landing extends Component {
         return (
             <>
             <div id="landing-main">
-                This will be a graph
                 <img src={ABlogo} alt="AB logo" />
+                <div id="landing-chart">
+                    This will be a graph
+                </div>
             </div>
             </>
         )
