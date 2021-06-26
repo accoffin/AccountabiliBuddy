@@ -60,12 +60,11 @@ export default function Activities() {
       });
       setDataForChart([...dataForChart, ...dataArray]);
     });
-    // eslint-disable-next-line
-  }, []);
+  }, [dataForChart]);
 
   useEffect(() => {
     setActivity(savedActivities);
-  },[setActivity, savedActivities]);
+  }, [setActivity, savedActivities]);
 
   const handleSelectActivity = (activity) => {
     service.saveSelectedActivityFromApi(activity).then((response) => {
@@ -172,7 +171,9 @@ export default function Activities() {
         )}
       </div>
       <div>
-        <h3 id={"h3title"} className={"bold"}>YOUR ACTIVITY LOG</h3>
+        <h3 id={"h3title"} className={"bold"}>
+          YOUR ACTIVITY LOG
+        </h3>
         <hr />
         <br></br>
         {createActivity ? (
@@ -182,8 +183,10 @@ export default function Activities() {
           />
         ) : (
           <div>
-          <h3 className={"bold"}>Add an activity!</h3>
-          <button onClick={handleCreateActivity} className={"reg"}>Create Activity</button>
+            <h3 className={"bold"}>Add an activity!</h3>
+            <button onClick={handleCreateActivity} className={"reg"}>
+              Create Activity
+            </button>
           </div>
         )}
         <div>
@@ -232,41 +235,49 @@ export default function Activities() {
         )}
       </div>
       <br />
-      <h3 className={"bold"}>Looking to try something new? Search our database for new activities!</h3>
+      <h3 className={"bold"}>
+        Looking to try something new? Search our database for new activities!
+      </h3>
       <hr />
       <br />
       <div className="reg">
         <div>
           <div id="query-activities-main">
             <form onSubmit={submitHandler}>
-              <label htmlFor="name" id={"formLabel"}>City:</label>
+              <label htmlFor="name" id={"formLabel"}>
+                City:
+              </label>
               <input
                 type="text"
                 placeholder=""
                 name="city"
                 onChange={changeHandler}
                 value={form.city}
-                style={{width: "300px", float: "right"}}
+                style={{ width: "300px", float: "right" }}
               />
               <br />
-              <label htmlFor="state" id={"formLabel"}>State:</label>
+              <label htmlFor="state" id={"formLabel"}>
+                State:
+              </label>
               <input
                 type="text"
                 placeholder=""
                 name="state"
                 onChange={changeHandler}
                 value={form.state}
-                style={{width: "300px", float: "right"}}
+                style={{ width: "300px", float: "right" }}
               />
               <br />
-              <label htmlFor="query" id={"formLabel"}>Keywords:</label>
+              <label htmlFor="query" id={"formLabel"}>
+                Keywords:
+              </label>
               <input
                 type="text"
                 placeholder=""
                 name="query"
                 onChange={changeHandler}
                 value={form.query}
-                style={{width: "300px", float: "right"}}
+                style={{ width: "300px", float: "right" }}
               />
               <br />
               <button>Search Activities!</button>
