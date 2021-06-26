@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
-import ABlogo from "../../images/logo.png";
 import service from "../../utils/service";
 
 export default class NavBar extends Component {
