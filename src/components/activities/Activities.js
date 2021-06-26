@@ -60,6 +60,7 @@ export default function Activities() {
       });
       setDataForChart([...dataForChart, ...dataArray]);
     });
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
