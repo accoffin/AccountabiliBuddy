@@ -60,10 +60,14 @@ export default function Activities() {
       });
       setDataForChart([...dataForChart, ...dataArray]);
     });
+
+    // eslint-disable-next-line
   }, [dataForChart]);
 
   useEffect(() => {
     setActivity(savedActivities);
+    
+    // eslint-disable-next-line
   }, [setActivity, savedActivities]);
 
   const handleSelectActivity = (activity) => {
