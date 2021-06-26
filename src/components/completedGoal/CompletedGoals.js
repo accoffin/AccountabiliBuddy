@@ -2,9 +2,9 @@ import React from "react";
 
 export default function CompletedGoals({ completedGoals }) {
   const topStyle = {
-    marginTop: "100px"
+    marginTop: '80px'
   }
-  
+
   return (
     <>
       <h2 style={topStyle}>Completed Goals!</h2>

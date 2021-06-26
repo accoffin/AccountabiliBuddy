@@ -40,7 +40,7 @@ export default class Signup extends Component {
           name="password"
           onChange={this.changeHandler}
         />
-        <button className={"reg"}>Login</button>
+        <button className={"reg"}>LOGIN</button>
       </form>
     );
   }
