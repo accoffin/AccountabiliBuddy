@@ -18,13 +18,20 @@
   font-weight: bold;
 }
 
+.bold-small {
+  font-family: 'Raleway';
+  font-weight: bold
+}
+
 .big {
   font-family: 'Raleway';
   font-size: 14px;
 }
 
-.App {
+.App, html, body, .app>div {
   text-align: center;
+  background-color: #3f51b5;
+  height: 100%
 }
 
 .App-logo {
@@ -50,7 +57,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #ffffff;
 }
 
 @keyframes App-logo-spin {

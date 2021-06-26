@@ -36,7 +36,7 @@ export default class Signup extends Component {
           name="password"
           onChange={this.changeHandler}
         />
-        <button>Signup</button>
+        <button>SIGN UP</button>
       </form>
     );
   }
