@@ -4,8 +4,8 @@ import service from "../../utils/service";
 export default function NewGoal({ user, handleReturnToDashboard, setGoals }) {
   const [form, setForm] = useState({
     title: "",
-    startDate: "",
-    endDate: "",
+    start: "",
+    end: "",
     user: user._id,
   });
 
