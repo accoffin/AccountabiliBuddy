@@ -9,8 +9,8 @@ export default function ActivityDetails({
 }) {
   const [form, setForm] = useState({
     title: "",
-    startDate: "",
-    endDate: "",
+    start: "",
+    end: "",
     description: "",
     user: user._id,
   });
@@ -37,7 +37,7 @@ export default function ActivityDetails({
       <br />
       <form onSubmit={submitHandler} className={"reg"}>
         <label htmlFor="title" id={"formInput"}>
-          Activity Name:{" "}
+          Activity Title:{" "}
         </label>
         <input
           type="text"
@@ -49,10 +49,19 @@ export default function ActivityDetails({
         />
         <br />
         <label htmlFor="startDate">Select Activity Start Date</label>
-        <input type="date" name="startDate" onChange={changeHandler} />
-        <label htmlFor="endDate">Select Activity End Date</label>
-        <input type="date" name="endDate" onChange={changeHandler} />
-        <br />
+        <input
+          type="date"
+          name="start"
+          onChange={changeHandler}
+          value={form.start}
+        />
+        <label htmlFor="end">Select Activity End Date</label>
+        <input
+          type="date"
+          name="end"
+          onChange={changeHandler}
+          value={form.end}
+        />
         <label htmlFor="state" id={"formInput"}>
           Activity Description:{" "}
         </label>

@@ -1,7 +1,7 @@
 import service from "../../utils/service";
 import React, { Component } from "react";
 
-export default class Signup extends Component {
+export default class Login extends Component {
   state = {
     username: "",
     password: "",
@@ -40,7 +40,7 @@ export default class Signup extends Component {
           name="password"
           onChange={this.changeHandler}
         />
-        <button className={"reg"}>Login</button>
+        <button className={"reg"}>LOGIN</button>
       </form>
     );
   }

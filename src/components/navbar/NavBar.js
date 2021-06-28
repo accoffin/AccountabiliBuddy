@@ -15,19 +15,19 @@ export default class NavBar extends Component {
   render() {
     return (
       <div className={"navbar"}>
-        <ul className={"bold"}>
+        <ul className={"bold-small"}>
           <Link to="/" >
-            <li>Home</li>
+            <li>HOME</li>
           </Link>
         </ul>
         <ul className={"bold"}>
           {this.props.user && (
             <>
               <Link to="/dashboard">
-                <li>Dashboard</li>
+                <li>DASHBOARD</li>
               </Link>
               <button to="/auth/logout" onClick={this.handleLogout}>
-                <li>Logout</li>
+                <li>LOGOUT</li>
               </button>
             </>
           )}
@@ -35,10 +35,10 @@ export default class NavBar extends Component {
           {!this.props.user && (
             <>
               <Link to="/auth/login">
-                <li>Login</li>
+                <li>LOGIN</li>
               </Link>
               <Link to="/auth/signup">
-                <li>Signup</li>
+                <li>SIGN UP</li>
               </Link>
             </>
           )}
