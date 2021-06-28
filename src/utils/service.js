@@ -40,10 +40,8 @@ const service = {
     await axiosInstance.post("/created-activities/create", activity),
   getCreatedActivitiesFromDB: async () =>
     await axiosInstance.get("/created-activities"),
-  deleteCreatedActivityFromDB: async (activityName) =>
-    await axiosInstance.post("/created-activities/delete", {
-      name: activityName,
-    }),
+  removeCreatedActivity: async (activityId) =>
+    await axiosInstance.post("/created-activities/remove", { activityId }),
 };
 
 export default service;

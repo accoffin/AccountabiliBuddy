@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Activities.css";
 import service from "../../utils/service";
 import Chart from "react-google-charts";
-import ActivityDetails from "../activityDetails/ActivityDetails";
+import CreateActivity from "../createActivity/CreateActivity";
 import { ActivityContext } from "../../TheContext";
 
-export default function Activities() {
+export default function Activities({ user }) {
   const [apiResults, setApiResults] = useState([]);
   const [savedActivities, setSavedActivities] = useState([]);
   const [createdActivities, setCreatedActivities] = useState([]);
@@ -22,7 +22,7 @@ export default function Activities() {
 
   useEffect(() => {
     service.getCreatedActivitiesFromDB().then((response) => {
-      setCreatedActivities(response.data.created_activities);
+      setCreatedActivities(response.data.createdActivities);
     });
     service.getSavedActivitiesFromAPI().then((response) => {
       setSavedActivities(response.data.activities);
@@ -60,11 +60,13 @@ export default function Activities() {
       });
       setDataForChart([...dataForChart, ...dataArray]);
     });
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     setActivity(savedActivities);
-  },[setActivity, savedActivities]);
+    // eslint-disable-next-line
+  }, [setActivity, savedActivities]);
 
   const handleSelectActivity = (activity) => {
     service.saveSelectedActivityFromApi(activity).then((response) => {
@@ -134,14 +136,12 @@ export default function Activities() {
     setCreateActivity(true);
   };
 
-  const handleDeleteCreatedActivity = async (activityName) => {
-    console.log("activityName", activityName);
-    await service.deleteCreatedActivityFromDB(activityName);
-    setCreatedActivities(
-      createdActivities.filter(
-        (createdActivity) => createdActivity.name !== activityName
-      )
-    );
+  const handleRemoveCreatedActivity = async (activityId) => {
+    console.log("activity id from remove created activity", activityId)
+    await service.removeCreatedActivity(activityId).then((response)=>{
+      setCreatedActivities(response.data.createdActivities);
+      console.log("created activities from removing service call", createdActivities)
+    })
   };
 
   return (
@@ -171,22 +171,26 @@ export default function Activities() {
         )}
       </div>
       <div>
-        <h3 id={"h3title"} className={"bold"}>YOUR ACTIVITY LOG</h3>
+        <h3 id={"h3title"} className={"bold"}>
+          YOUR ACTIVITY LOG
+        </h3>
         <hr />
         <br></br>
         {createActivity ? (
-          <ActivityDetails
+          <CreateActivity
             setCreatedActivities={setCreatedActivities}
             setCreateActivity={setCreateActivity}
+            user={user}
           />
         ) : (
           <div>
-          <h3 className={"bold"}>Add an activity!</h3>
-          <button onClick={handleCreateActivity} className={"reg"}>Create Activity</button>
+            <h3 className={"bold"}>Add an activity!</h3>
+            <button onClick={handleCreateActivity} className={"reg"}>
+              Create Activity
+            </button>
           </div>
         )}
         <div>
-          {console.log("created activities at POU", createdActivities)}
           {createdActivities ? (
             <>
               <div id={"saved-activity-main"}>
@@ -195,9 +199,11 @@ export default function Activities() {
                     <div
                       id={"activity-card"}
                       key={activity._id}
-                      onClick={() => handleDeleteCreatedActivity(activity.name)}
+                      onClick={() =>
+                        handleRemoveCreatedActivity(activity._id)
+                      }
                     >
-                      <p>{activity.name}</p>
+                      <p>{activity.title}</p>
                       <p>{activity.description}</p>
                     </div>
                   );
@@ -231,41 +237,49 @@ export default function Activities() {
         )}
       </div>
       <br />
-      <h3 className={"bold"}>Looking to try something new? Search our database for new activities!</h3>
+      <h3 className={"bold"}>
+        Looking to try something new? Search our database for new activities!
+      </h3>
       <hr />
       <br />
-      <div className="reg">
+      <div className={"reg"}>
         <div>
           <div id="query-activities-main">
             <form onSubmit={submitHandler}>
-              <label htmlFor="name" id={"formLabel"}>City:</label>
+              <label htmlFor="name" id={"formLabel"}>
+                City:
+              </label>
               <input
                 type="text"
                 placeholder=""
                 name="city"
                 onChange={changeHandler}
                 value={form.city}
-                style={{width: "300px", float: "right"}}
+                style={{ width: "300px", float: "right" }}
               />
               <br />
-              <label htmlFor="state" id={"formLabel"}>State:</label>
+              <label htmlFor="state" id={"formLabel"}>
+                State:
+              </label>
               <input
                 type="text"
                 placeholder=""
                 name="state"
                 onChange={changeHandler}
                 value={form.state}
-                style={{width: "300px", float: "right"}}
+                style={{ width: "300px", float: "right" }}
               />
               <br />
-              <label htmlFor="query" id={"formLabel"}>Keywords:</label>
+              <label htmlFor="query" id={"formLabel"}>
+                Keywords:
+              </label>
               <input
                 type="text"
                 placeholder=""
                 name="query"
                 onChange={changeHandler}
                 value={form.query}
-                style={{width: "300px", float: "right"}}
+                style={{ width: "300px", float: "right" }}
               />
               <br />
               <button>Search Activities!</button>

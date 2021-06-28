@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import service from "../../utils/service";
-import './ActivityDetails.css';
+import "./CreateActivity.css";
 
 export default function ActivityDetails({
   setCreatedActivities,
   setCreateActivity,
+  user,
 }) {
   const [form, setForm] = useState({
-    name: "",
+    title: "",
+    startDate: "",
+    endDate: "",
     description: "",
+    user: user._id,
   });
 
   const submitHandler = async (e) => {
     e.preventDefault();
     await service.saveCreatedActivity(form).then((response) => {
-      const allActivities = response.data.created_activities;
+      const allActivities = response.data.createdActivities;
+      console.log("return value from saving created activity", allActivities)
       setCreatedActivities(allActivities);
       setCreateActivity(false);
     });
@@ -30,29 +35,34 @@ export default function ActivityDetails({
     <>
       <div className={"reg"}>Enter the details of your activity!</div>
       <br />
-      <form onSubmit={submitHandler}
-      className={"reg"}>
-        <label htmlFor="name"
-        id={"formInput"}>Activity Name: </label>
+      <form onSubmit={submitHandler} className={"reg"}>
+        <label htmlFor="title" id={"formInput"}>
+          Activity Name:{" "}
+        </label>
         <input
           type="text"
           placeholder=""
-          name="name"
+          name="title"
           onChange={changeHandler}
-          value={form.name}
-          style={{width: "300px", float: "right"}}
-          
+          value={form.title}
+          style={{ width: "300px", float: "right" }}
         />
         <br />
-        <label htmlFor="state"
-        id={"formInput"}>Activity Description: </label>
+        <label htmlFor="startDate">Select Activity Start Date</label>
+        <input type="date" name="startDate" onChange={changeHandler} />
+        <label htmlFor="endDate">Select Activity End Date</label>
+        <input type="date" name="endDate" onChange={changeHandler} />
+        <br />
+        <label htmlFor="state" id={"formInput"}>
+          Activity Description:{" "}
+        </label>
         <input
           type="text"
           placeholder=""
           name="description"
           onChange={changeHandler}
           value={form.description}
-          style={{width: "300px", float: "right"}}
+          style={{ width: "300px", float: "right" }}
         />
         <br />
         <button>Create Activity!</button>
