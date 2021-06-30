@@ -100,6 +100,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PersistentDrawer({ user, setUser, history }) {
+  useEffect(() => {
+    if (!user) history.push("/");
+    // eslint-disable-next-line
+  }, []);
+
   const classes = useStyles();
   const theme = useTheme();
 

@@ -27,39 +27,39 @@ export default function Activities({ user }) {
     service.getSavedActivitiesFromAPI().then((response) => {
       setSavedActivities(response.data.activities);
     });
-    service.getActivitiesAPI(form).then((response) => {
-      const activities = response.data.activities.results;
-      // create array of Guids to filter api results against
-      let activitiesAlreadySaved = savedActivities.map(
-        (activity) => activity.assetGuid
-      );
-      // don't show activities that we already have saved
-      const filteredActivities = activities.filter((activity) => {
-        return !activitiesAlreadySaved.includes(activity.assetGuid);
-      });
-      setApiResults(filteredActivities);
+    // service.getActivitiesAPI(form).then((response) => {
+    //   const activities = response.data.activities.results;
+    //   // create array of Guids to filter api results against
+    //   let activitiesAlreadySaved = savedActivities.map(
+    //     (activity) => activity.assetGuid
+    //   );
+    //   // don't show activities that we already have saved
+    //   const filteredActivities = activities.filter((activity) => {
+    //     return !activitiesAlreadySaved.includes(activity.assetGuid);
+    //   });
+    //   setApiResults(filteredActivities);
 
-      // create hashtable to analyze categories from api results
-      const hashedCategory = {};
-      for (const element in filteredActivities) {
-        const arrayOfAssetCategories =
-          filteredActivities[element].assetCategories;
-        for (const categoryObj in arrayOfAssetCategories) {
-          const categoryName =
-            arrayOfAssetCategories[categoryObj].category.categoryName;
+    //   // create hashtable to analyze categories from api results
+    //   const hashedCategory = {};
+    //   for (const element in filteredActivities) {
+    //     const arrayOfAssetCategories =
+    //       filteredActivities[element].assetCategories;
+    //     for (const categoryObj in arrayOfAssetCategories) {
+    //       const categoryName =
+    //         arrayOfAssetCategories[categoryObj].category.categoryName;
 
-          hashedCategory[categoryName] = hashedCategory[categoryName]
-            ? (hashedCategory[categoryName] += 1)
-            : 1;
-        }
-      }
-      const hashKeys = Object.keys(hashedCategory);
-      const dataArray = [];
-      hashKeys.forEach((key) => {
-        dataArray.push([key, hashedCategory[key]]);
-      });
-      setDataForChart([...dataForChart, ...dataArray]);
-    });
+    //       hashedCategory[categoryName] = hashedCategory[categoryName]
+    //         ? (hashedCategory[categoryName] += 1)
+    //         : 1;
+    //     }
+    //   }
+    //   const hashKeys = Object.keys(hashedCategory);
+    //   const dataArray = [];
+    //   hashKeys.forEach((key) => {
+    //     dataArray.push([key, hashedCategory[key]]);
+    //   });
+    //   setDataForChart([...dataForChart, ...dataArray]);
+    // });
     // eslint-disable-next-line
   }, []);
 

@@ -48,7 +48,6 @@ export default function App() {
             path="/auth/login"
             render={(props) => <Login {...props} setUser={setUser} />}
           />
-
           <Route
             exact
             path="/dashboard"
