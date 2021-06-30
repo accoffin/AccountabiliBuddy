@@ -2,10 +2,10 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Activities.css";
 import service from "../../utils/service";
 import Chart from "react-google-charts";
-import ActivityDetails from "../activityDetails/ActivityDetails";
+import CreateActivity from "../createActivity/CreateActivity";
 import { ActivityContext } from "../../TheContext";
 
-export default function Activities() {
+export default function Activities({ user }) {
   const [apiResults, setApiResults] = useState([]);
   const [savedActivities, setSavedActivities] = useState([]);
   const [createdActivities, setCreatedActivities] = useState([]);
@@ -22,7 +22,7 @@ export default function Activities() {
 
   useEffect(() => {
     service.getCreatedActivitiesFromDB().then((response) => {
-      setCreatedActivities(response.data.created_activities);
+      setCreatedActivities(response.data.createdActivities);
     });
     service.getSavedActivitiesFromAPI().then((response) => {
       setSavedActivities(response.data.activities);
@@ -60,10 +60,12 @@ export default function Activities() {
       });
       setDataForChart([...dataForChart, ...dataArray]);
     });
-  }, [dataForChart]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     setActivity(savedActivities);
+    // eslint-disable-next-line
   }, [setActivity, savedActivities]);
 
   const handleSelectActivity = (activity) => {
@@ -134,14 +136,12 @@ export default function Activities() {
     setCreateActivity(true);
   };
 
-  const handleDeleteCreatedActivity = async (activityName) => {
-    console.log("activityName", activityName);
-    await service.deleteCreatedActivityFromDB(activityName);
-    setCreatedActivities(
-      createdActivities.filter(
-        (createdActivity) => createdActivity.name !== activityName
-      )
-    );
+  const handleRemoveCreatedActivity = async (activityId) => {
+    console.log("activity id from remove created activity", activityId)
+    await service.removeCreatedActivity(activityId).then((response)=>{
+      setCreatedActivities(response.data.createdActivities);
+      console.log("created activities from removing service call", createdActivities)
+    })
   };
 
   return (
@@ -177,9 +177,10 @@ export default function Activities() {
         <hr />
         <br></br>
         {createActivity ? (
-          <ActivityDetails
+          <CreateActivity
             setCreatedActivities={setCreatedActivities}
             setCreateActivity={setCreateActivity}
+            user={user}
           />
         ) : (
           <div>
@@ -190,7 +191,6 @@ export default function Activities() {
           </div>
         )}
         <div>
-          {console.log("created activities at POU", createdActivities)}
           {createdActivities ? (
             <>
               <div id={"saved-activity-main"}>
@@ -199,9 +199,11 @@ export default function Activities() {
                     <div
                       id={"activity-card"}
                       key={activity._id}
-                      onClick={() => handleDeleteCreatedActivity(activity.name)}
+                      onClick={() =>
+                        handleRemoveCreatedActivity(activity._id)
+                      }
                     >
-                      <p>{activity.name}</p>
+                      <p>{activity.title}</p>
                       <p>{activity.description}</p>
                     </div>
                   );
@@ -240,7 +242,7 @@ export default function Activities() {
       </h3>
       <hr />
       <br />
-      <div className="reg">
+      <div className={"reg"}>
         <div>
           <div id="query-activities-main">
             <form onSubmit={submitHandler}>

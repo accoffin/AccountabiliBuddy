@@ -268,7 +268,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
                 <ListItemIcon>
                   <AssignmentTurnedInIcon />
                 </ListItemIcon>
-                <ListItemText primary={goal.name} />
+                <ListItemText primary={goal.title} />
               </ListItem>
             ))
           ) : (

@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import service from "../../utils/service";
-import "./ActivityDetails.css";
+import "./CreateActivity.css";
 
 export default function ActivityDetails({
   setCreatedActivities,
   setCreateActivity,
+  user,
 }) {
   const [form, setForm] = useState({
     title: "",
     start: "",
     end: "",
     description: "",
+    user: user._id,
   });
 
   const submitHandler = async (e) => {
     e.preventDefault();
     await service.saveCreatedActivity(form).then((response) => {
-      const allActivities = response.data.created_activities;
+      const allActivities = response.data.createdActivities;
+      console.log("return value from saving created activity", allActivities)
       setCreatedActivities(allActivities);
       setCreateActivity(false);
     });

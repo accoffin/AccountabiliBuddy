@@ -1,27 +1,23 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-// import ApiCalendar from "react-google-calendar-api";
 import "./Calendar.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { ActivityContext } from "../../TheContext";
 import service from "../../utils/service";
 
-const localizer = momentLocalizer(moment); // or globalizeLocalizer
+const localizer = momentLocalizer(moment);
 
 export default function CalendarComponent(props) {
-  const { activity } = useContext(ActivityContext);
   const [createdEvents, setCreatedEvents] = useState([]);
-  const [savedEventsFromAPI, setSavedEventsFromAPI] = useState([]);
 
   useEffect(() => {
     service.getCreatedActivitiesFromDB().then((response) => {
-      setCreatedEvents(response.data.created_activities);
+      console.log("response from cal", response.data.createdActivities);
+      setCreatedEvents(response.data.createdActivities);
     });
+    // eslint-disable-next-line
   }, []);
 
-  console.log("You've also loaded your activities:", activity);
-  console.log("You have loaded the calendar!");
   return (
     <>
       <div className="CalendarComponent">
