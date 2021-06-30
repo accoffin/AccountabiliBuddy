@@ -8,11 +8,12 @@ export default class Login extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
+    const self = this;
     const { username, password } = this.state;
     service.login({ username, password }).then((responseFromServer) => {
       const { user } = responseFromServer.data;
-      this.props.setUser(user);
-      this.props.history.push("/dashboard");
+      self.props.setUser(user);
+      self.props.history.push("/dashboard");
     });
   };
   changeHandler = (e) => {
