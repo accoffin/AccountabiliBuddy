@@ -12,7 +12,7 @@ import { ActivityContextProvider } from "./TheContext";
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const updateUser = (userData) => setUser(userData);
+  // const updateUser = (userData) => setUser(userData);
 
   // prevents having to login on refresh
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function App() {
         <Route
           path="/"
           render={(props) => (
-            <NavBar {...props} user={user} setUser={updateUser} />
+            <NavBar {...props} user={user} setUser={setUser} />
           )}
         />
         <Switch>
@@ -42,13 +42,13 @@ export default function App() {
           <Route
             exact
             path="/auth/login"
-            render={(props) => <Login {...props} setUser={updateUser} />}
+            render={(props) => <Login {...props} setUser={setUser} />}
           />
           <Route
             exact
             path="/dashboard"
             render={(props) => (
-              <PersistentDrawer {...props} user={user} setUser={updateUser} />
+              <PersistentDrawer {...props} user={user} setUser={setUser} />
             )}
           />
         </Switch>
