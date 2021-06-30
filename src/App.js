@@ -33,7 +33,11 @@ export default function App() {
           )}
         />
         <Switch>
-          <Route exact path="/" render={(props) => <Landing {...props} />} />
+          <Route
+            exact
+            path="/"
+            render={(props) => <Landing {...props} setUser={setUser} />}
+          />
           <Route
             exact
             path="/auth/signup"

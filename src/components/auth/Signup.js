@@ -10,6 +10,7 @@ export default class Signup extends Component {
     e.preventDefault();
     const { username, password } = this.state;
     service.signup({ username, password }).then((responseFromServer) => {});
+    this.props.history.push("/dashboard");
   };
   changeHandler = (e) => {
     const name = e.target.name;
