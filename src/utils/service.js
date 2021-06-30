@@ -3,7 +3,7 @@ import axios from "axios";
 // create a new instance of axios for which all the routes are pointing to the baseURL
 // withCredentials allows us to convey cookie information from and to the server
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://accountabilibuddy-backend.herokuapp.com",
   withCredentials: true,
 });
 
