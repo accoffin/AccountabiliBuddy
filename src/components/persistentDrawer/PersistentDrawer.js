@@ -273,7 +273,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
                 <ListItemIcon>
                   <AssignmentTurnedInIcon />
                 </ListItemIcon>
-                <ListItemText disableTypography className={"reg"} primary={goal.name} style={{ textTransform: 'uppercase'}} />
+                <ListItemText disableTypography className={"reg"} primary={goal.title} style={{ textTransform: 'uppercase'}} />
               </ListItem>
             ))
           ) : (
