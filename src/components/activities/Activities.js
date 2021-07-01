@@ -250,7 +250,6 @@ export default function Activities({ user }) {
               <label htmlFor="name" id={"formInput"}>CITY: </label>
               <input
                 type="text"
-                placeholder=""
                 name="city"
                 onChange={changeHandler}
                 value={form.city}

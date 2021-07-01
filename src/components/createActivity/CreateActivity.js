@@ -41,14 +41,13 @@ export default function ActivityDetails({
         </label>
         <input
           type="text"
-          placeholder=""
           name="title"
           onChange={changeHandler}
           value={form.title}
           style={{ width: "300px", textAlign: "right" }}
         />
         <br />
-        <label htmlFor="startDate" id={"formInput"} className={"bold-small"}>START DATE:</label>
+        <label htmlFor="start" id={"formInput"} className={"bold-small"}>START DATE:</label>
         <input
           type="date"
           name="start"
@@ -69,7 +68,6 @@ export default function ActivityDetails({
         <label htmlFor="state" id={"formInput"} className={"bold-small"}>DESCRIPTION:{" "}</label>
         <input
           type="text"
-          placeholder=""
           name="description"
           onChange={changeHandler}
           value={form.description}

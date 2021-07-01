@@ -73,8 +73,8 @@ export default function UpdateGoal({
         <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
           {!editable ? (
             <>
-              <div>{`Goal settings for ${details.title} ${activity}`}</div>
-              <h2>{`Name: ${details.title}`}</h2>
+              <div>{`Goal settings for ${goal.title} ${activity}`}</div>
+              <h2>{`Name: ${goal.title}`}</h2>
               <h2 className={"reg"}>{`Activities: `} </h2>
               {details.activities.map((activity) => {
                 return <h3 key={activity} className={"reg"} style={{ textTransform: 'uppercase'}}>{activity}</h3>;
@@ -94,8 +94,7 @@ export default function UpdateGoal({
                 <label htmlFor="name">GOAL NAME: </label>
                 <input
                   type="text"
-                  placeholder="Name of goal"
-                  name="name"
+                  name="title"
                   onChange={changeHandler}
                   value={form.title}
                 />
@@ -119,7 +118,6 @@ export default function UpdateGoal({
                 <label htmlFor="activities">ADD ACTIVITIES: </label>
                 <input
                   type="enum"
-                  placeholder="activities"
                   name="activities"
                   onChange={changeHandler}
                   value={form.activities}
