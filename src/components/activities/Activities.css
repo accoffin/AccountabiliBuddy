@@ -31,3 +31,8 @@
 label {
   margin-left: 20px
 }
+
+#formInput {
+  text-align: right;
+  margin-right: 100px;
+}

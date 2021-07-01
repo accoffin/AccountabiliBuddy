@@ -147,7 +147,7 @@ export default function Activities({ user }) {
   return (
     <>
       <br></br>
-      <h3 id={"h3title"} className={"bold"}>MY SAVED ACTIVITIES</h3>
+      <h3 id={"h3title"} className={"bold"} style={{marginTop: "100px"}}>MY SAVED ACTIVITIES</h3>
       <div id={"saved-activity-main"} className={"reg"}>
         {savedActivities ? (
           <>
@@ -277,7 +277,7 @@ export default function Activities({ user }) {
                 style={{ width: "300px", textAlign: "right" }}
               />
               <br />
-              <button>Search Activities!</button>
+              <button>Search Activities</button>
             </form>
           </div>
         </div>

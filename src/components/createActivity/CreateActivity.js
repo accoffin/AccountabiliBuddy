@@ -35,67 +35,48 @@ export default function ActivityDetails({
     <>
       <div className={"reg"}>Enter the details of your activity!</div>
       <br />
-<<<<<<< HEAD:src/components/activityDetails/ActivityDetails.js
-      <form onSubmit={submitHandler}
-      className={"bold-small"} id={"formInput"}>
-        <label htmlFor="name"
-        id={"formInput"}>ACTIVITY NAME: </label>
-=======
-      <form onSubmit={submitHandler} className={"reg"}>
-        <label htmlFor="title" id={"formInput"}>
-          Activity Title:{" "}
+      <form onSubmit={submitHandler} id={"formInput"}>
+        <label htmlFor="title" id={"formInput"} className={"bold-small"}>
+          ACTIVITY TITLE:{" "}
         </label>
->>>>>>> origin/master:src/components/createActivity/CreateActivity.js
         <input
           type="text"
           placeholder=""
           name="title"
           onChange={changeHandler}
-<<<<<<< HEAD:src/components/activityDetails/ActivityDetails.js
-          value={form.name}
-          style={{width: "300px"}}
-          
-        />
-        <br />
-        <label htmlFor="state"
-        id={"formInput"}>DESCRIPTION: </label>
-=======
           value={form.title}
-          style={{ width: "300px", float: "right" }}
+          style={{ width: "300px", textAlign: "right" }}
         />
         <br />
-        <label htmlFor="startDate">Select Activity Start Date</label>
+        <label htmlFor="startDate" id={"formInput"} className={"bold-small"}>START DATE:</label>
         <input
           type="date"
           name="start"
           onChange={changeHandler}
           value={form.start}
+          style={{ width: "300px", textAlign: "right" }}
         />
-        <label htmlFor="end">Select Activity End Date</label>
+        <br />
+        <label htmlFor="end" id={"formInput"} className={"bold-small"}>END DATE:</label>
         <input
           type="date"
           name="end"
           onChange={changeHandler}
           value={form.end}
+          style={{ width: "300px", textAlign: "right" }}
         />
-        <label htmlFor="state" id={"formInput"}>
-          Activity Description:{" "}
-        </label>
->>>>>>> origin/master:src/components/createActivity/CreateActivity.js
+        <br />
+        <label htmlFor="state" id={"formInput"} className={"bold-small"}>DESCRIPTION:{" "}</label>
         <input
           type="text"
           placeholder=""
           name="description"
           onChange={changeHandler}
           value={form.description}
-<<<<<<< HEAD:src/components/activityDetails/ActivityDetails.js
-          style={{width: "300px"}}
-=======
-          style={{ width: "300px", float: "right" }}
->>>>>>> origin/master:src/components/createActivity/CreateActivity.js
+          style={{ width: "300px", textAlign: "right" }}
         />
         <br />
-        <button>Create Activity!</button>
+        <button>Create Activity</button>
       </form>
     </>
   );
