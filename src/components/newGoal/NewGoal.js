@@ -3,11 +3,9 @@ import service from "../../utils/service";
 
 export default function NewGoal({ user, handleReturnToDashboard, setGoals }) {
   const [form, setForm] = useState({
-    name: "",
-    startDate: "",
-    endDate: "",
-    activities: [],
-    achievements: [],
+    title: "",
+    start: "",
+    end: "",
     user: user._id,
   });
 
@@ -35,10 +33,11 @@ export default function NewGoal({ user, handleReturnToDashboard, setGoals }) {
       {/* create a UI/wizard or logic to help users create a goal */}
       <div style={{width: "500px"}}>
         <form onSubmit={submitHandler} className={"bold-small"}>
-          <label htmlFor="name">NAME YOUR GOAL: </label>
+          <label htmlFor="title">NAME YOUR GOAL: </label>
           <input
             type="text"
-            name="name"
+            placeholder="Name of goal"
+            name="title"
             onChange={changeHandler}
           />
           <br />
@@ -47,14 +46,6 @@ export default function NewGoal({ user, handleReturnToDashboard, setGoals }) {
           <br />
           <label htmlFor="endDate">END DATE: </label>
           <input type="date" name="endDate" onChange={changeHandler} />
-          <br />
-          <label htmlFor="activities">ADD ACTIVITIES: </label>
-          <input
-            type="enum"
-            name="activities"
-            onChange={changeHandler}
-          />
-          <br />
           <button>Create Goal!</button>
         </form>
       </div>

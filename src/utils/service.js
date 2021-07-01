@@ -3,7 +3,7 @@ import axios from "axios";
 // create a new instance of axios for which all the routes are pointing to the baseURL
 // withCredentials allows us to convey cookie information from and to the server
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: process.env.REACT_APP_API || "http://localhost:5000",
   withCredentials: true,
 });
 
@@ -40,10 +40,8 @@ const service = {
     await axiosInstance.post("/created-activities/create", activity),
   getCreatedActivitiesFromDB: async () =>
     await axiosInstance.get("/created-activities"),
-  deleteCreatedActivityFromDB: async (activityName) =>
-    await axiosInstance.post("/created-activities/delete", {
-      name: activityName,
-    }),
+  removeCreatedActivity: async (activityId) =>
+    await axiosInstance.post("/created-activities/remove", { activityId }),
 };
 
 export default service;

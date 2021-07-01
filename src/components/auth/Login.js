@@ -6,8 +6,8 @@ export default class Login extends Component {
     username: "",
     password: "",
   };
-  submitHandler = (e) => {
-    e.preventDefault();
+  submitHandler = (event) => {
+    event.preventDefault();
     const { username, password } = this.state;
     service.login({ username, password }).then((responseFromServer) => {
       const { user } = responseFromServer.data;
@@ -23,6 +23,7 @@ export default class Login extends Component {
     });
   };
   render() {
+    console.log(this, this.props);
     return (
       <form onSubmit={this.submitHandler} className={"reg"}>
         <input

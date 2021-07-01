@@ -40,7 +40,7 @@ export default function DashboardFunction({
         </>
       );
     } else if (manageActivities) {
-      return <Activities />;
+      return <Activities user={user}/>;
     } else if (manageCompletedGoals) {
       return <CompletedGoals completedGoals={completedGoals} />;
     } else if (manageCalendar) {

@@ -100,6 +100,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PersistentDrawer({ user, setUser, history }) {
+  useEffect(() => {
+    if (!user) history.push("/");
+    // eslint-disable-next-line
+  }, []);
+
   const classes = useStyles();
   const theme = useTheme();
 
@@ -268,7 +273,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
                 <ListItemIcon>
                   <AssignmentTurnedInIcon />
                 </ListItemIcon>
-                <ListItemText disableTypography className={"reg"} primary={goal.name} style={{ textTransform: 'uppercase'}} />
+                <ListItemText disableTypography className={"reg"} primary={goal.title} style={{ textTransform: 'uppercase'}} />
               </ListItem>
             ))
           ) : (

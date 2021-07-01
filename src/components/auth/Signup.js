@@ -9,8 +9,8 @@ export default class Signup extends Component {
   submitHandler = (e) => {
     e.preventDefault();
     const { username, password } = this.state;
-    service.signup({ username, password }).then((responseFromServer) => {
-    });
+    service.signup({ username, password }).then((responseFromServer) => {});
+    this.props.history.push("/dashboard");
   };
   changeHandler = (e) => {
     const name = e.target.name;
@@ -23,6 +23,7 @@ export default class Signup extends Component {
  
 
   render() {
+    console.log(this, this.props);
     return (
       <form onSubmit={this.submitHandler}>
         <input

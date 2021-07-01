@@ -14,10 +14,11 @@ export default function UpdateGoal({
   console.log("this is activities", activity);
   useEffect(() => {
     setDetails(goal);
+    // eslint-disable-next-line
   }, [goal]);
 
   const [form, setForm] = useState({
-    name: goal.name ? goal.name : `undefined`,
+    name: goal.title ? goal.title : `undefined`,
     startDate: goal.startDate ? goal.startDate : "",
     endDate: goal.endDate ? goal.endDate : "",
     activities: goal.activities ? goal.activities : `undefined`,
@@ -72,9 +73,9 @@ export default function UpdateGoal({
         <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
           {!editable ? (
             <>
-              <div>{`Goal settings for ${goal.name} ${activity}`}</div>
-              <h2>{`Name: ${goal.name}`}</h2>
-              <h2 className={["reg"]}>{`Activities: `} </h2>
+              <div>{`Goal settings for ${details.title} ${activity}`}</div>
+              <h2>{`Name: ${details.title}`}</h2>
+              <h2 className={"reg"}>{`Activities: `} </h2>
               {details.activities.map((activity) => {
                 return <h3 key={activity} className={"reg"} style={{ textTransform: 'uppercase'}}>{activity}</h3>;
               })}
@@ -96,7 +97,7 @@ export default function UpdateGoal({
                   placeholder="Name of goal"
                   name="name"
                   onChange={changeHandler}
-                  value={form.name}
+                  value={form.title}
                 />
                 <br />
                 <label htmlFor="startDate">START DATE: </label>

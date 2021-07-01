@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Login from "../auth/Login";
 import "./Landing.css";
-import ABlogo from '../../images/logo.png'
+import ABlogo from "../../images/logo.png";
 
 export default class Landing extends Component {
     render() {
@@ -14,7 +14,7 @@ export default class Landing extends Component {
                     <br />
                     <Login {...this.props} setUser={this.props.setUser}/>
                     <br />
-                    <ul style={{ textDecoration: 'none' }}>Don't have an account?
+                    <ul>Don't have an account?
                     <br /> 
                     <Link to="/auth/signup" style={{ textDecoration: 'none' }}>
                     Sign Up!
