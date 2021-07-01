@@ -10,13 +10,14 @@ export default class Landing extends Component {
             <>
             <div id="landing-main">
                 <img src={ABlogo} alt="AB logo" />
-                <div id="landing-chart">
+                <div id="landing-chart" style={{ textDecoration: 'none' }}>
                     <br />
-                    <Login></Login>
+                    <Login {...this.props} setUser={this.props.setUser}/>
                     <br />
-                    <ul>Don't have an account? 
+                    <ul style={{ textDecoration: 'none' }}>Don't have an account?
+                    <br /> 
                     <Link to="/auth/signup" style={{ textDecoration: 'none' }}>
-                        <li style={{ textDecoration: 'none' }}>Sign Up!</li>
+                    Sign Up!
                         </Link>
                         </ul>
                 </div>

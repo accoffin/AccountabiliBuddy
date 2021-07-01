@@ -22,7 +22,7 @@ import Dashboard from "../dashboard/Dashboard";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ListIcon from "@material-ui/icons/List";
 import DoneIcon from "@material-ui/icons/Done";
-import AddBoxIcon from "@material-ui/icons/AddBox";
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ABlogo from "../../images/logo.png";
 
 // const { google } = require("googleapis");
@@ -268,7 +268,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
                 <ListItemIcon>
                   <AssignmentTurnedInIcon />
                 </ListItemIcon>
-                <ListItemText primary={goal.name} />
+                <ListItemText disableTypography className={"reg"} primary={goal.name} style={{ textTransform: 'uppercase'}} />
               </ListItem>
             ))
           ) : (
@@ -308,7 +308,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
             }}
           >
             <ListItemIcon>
-              <AddBoxIcon />
+              <AddCircleOutlineIcon />
             </ListItemIcon>
             <ListItemText disableTypography className={["reg", "big"]}>
               CREATE A GOAL

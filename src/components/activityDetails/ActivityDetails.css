@@ -1,5 +1,6 @@
 #formInput {
-    float: left;
+    text-align: right;
+    margin-right: 100px;
 }
 
 button {

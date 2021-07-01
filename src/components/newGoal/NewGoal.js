@@ -27,34 +27,37 @@ export default function NewGoal({ user, handleReturnToDashboard, setGoals }) {
 
   return (
     <>
-      <h1>{`You go ${user.username}!`}</h1>
-      <h2>{`Complete the form below to create a new goal!`}</h2>
+    <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
+      <h1>{`You go, ${user.username}!`}</h1>
+      <hr />
+      <h2 className={"reg"}>{`ADD A GOAL`}</h2>
 
       {/* create a UI/wizard or logic to help users create a goal */}
-      <div>
-        <form onSubmit={submitHandler}>
-          <label htmlFor="name">Name your goal!</label>
+      <div style={{width: "500px"}}>
+        <form onSubmit={submitHandler} className={"bold-small"}>
+          <label htmlFor="name">NAME YOUR GOAL: </label>
           <input
             type="text"
-            placeholder="Name of goal"
             name="name"
             onChange={changeHandler}
           />
-          <label htmlFor="startDate">Select Goal Start Date</label>
+          <br />
+          <label htmlFor="startDate">START DATE: </label>
           <input type="date" name="startDate" onChange={changeHandler} />
-          <label htmlFor="endDate">Select Goal End Date</label>
+          <br />
+          <label htmlFor="endDate">END DATE: </label>
           <input type="date" name="endDate" onChange={changeHandler} />
-          <label htmlFor="activities">
-            Select Activities to accomplish your goal!
-          </label>
+          <br />
+          <label htmlFor="activities">ADD ACTIVITIES: </label>
           <input
             type="enum"
-            placeholder="activities"
             name="activities"
             onChange={changeHandler}
           />
+          <br />
           <button>Create Goal!</button>
         </form>
+      </div>
       </div>
     </>
   );

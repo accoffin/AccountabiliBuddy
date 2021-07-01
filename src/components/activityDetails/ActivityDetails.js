@@ -31,28 +31,28 @@ export default function ActivityDetails({
       <div className={"reg"}>Enter the details of your activity!</div>
       <br />
       <form onSubmit={submitHandler}
-      className={"reg"}>
+      className={"bold-small"} id={"formInput"}>
         <label htmlFor="name"
-        id={"formInput"}>Activity Name: </label>
+        id={"formInput"}>ACTIVITY NAME: </label>
         <input
           type="text"
           placeholder=""
           name="name"
           onChange={changeHandler}
           value={form.name}
-          style={{width: "300px", float: "right"}}
+          style={{width: "300px"}}
           
         />
         <br />
         <label htmlFor="state"
-        id={"formInput"}>Activity Description: </label>
+        id={"formInput"}>DESCRIPTION: </label>
         <input
           type="text"
           placeholder=""
           name="description"
           onChange={changeHandler}
           value={form.description}
-          style={{width: "300px", float: "right"}}
+          style={{width: "300px"}}
         />
         <br />
         <button>Create Activity!</button>

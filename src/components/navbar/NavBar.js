@@ -43,7 +43,7 @@ export default class NavBar extends Component {
             </>
           )} */}
 
-          {this.props.user && <li>{this.props.user.username}</li>}
+          {/* {this.props.user && <li>{this.props.user.username}</li>} */}
         </ul>
       </div>
     );

@@ -19,6 +19,9 @@ export default class Signup extends Component {
       [name]: value,
     });
   };
+
+ 
+
   render() {
     return (
       <form onSubmit={this.submitHandler}>

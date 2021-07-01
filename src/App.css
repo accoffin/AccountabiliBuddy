@@ -20,7 +20,8 @@
 
 .bold-small {
   font-family: 'Raleway';
-  font-weight: bold
+  font-weight: bold;
+  font-size: 12px
 }
 
 .big {

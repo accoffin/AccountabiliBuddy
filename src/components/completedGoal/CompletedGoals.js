@@ -12,7 +12,7 @@ export default function CompletedGoals({ completedGoals }) {
 
   return (
     <>
-      <h2 style={topStyle}>Completed Goals!</h2>
+      <h2 className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>Completed Goals!</h2>
       {completedGoals.map((goal) => {
         return <h3 key={goal._id} style={bodyStyle}>{goal.name}</h3>;
       })}

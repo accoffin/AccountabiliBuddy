@@ -69,28 +69,28 @@ export default function UpdateGoal({
   return (
     <>
       {details && (
-        <div>
+        <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
           {!editable ? (
             <>
               <div>{`Goal settings for ${goal.name} ${activity}`}</div>
               <h2>{`Name: ${goal.name}`}</h2>
-              <h2>{`Activities: `} </h2>
+              <h2 className={["reg"]}>{`Activities: `} </h2>
               {details.activities.map((activity) => {
-                return <h3 key={activity}>{activity}</h3>;
+                return <h3 key={activity} className={"reg"} style={{ textTransform: 'uppercase'}}>{activity}</h3>;
               })}
               {goal.completed ? (
                 <h1>Goal Complete!</h1>
               ) : (
                 <>
+                  <button onClick={handleEdit}>Edit Goal</button>
                   <button onClick={handleComplete}>Mark as Complete!</button>
-                  <button onClick={handleEdit}>Edit</button>
                 </>
               )}
             </>
           ) : (
-            <div>
+            <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
               <form onSubmit={submitHandler}>
-                <label htmlFor="name">Name your goal!</label>
+                <label htmlFor="name">GOAL NAME: </label>
                 <input
                   type="text"
                   placeholder="Name of goal"
@@ -98,23 +98,24 @@ export default function UpdateGoal({
                   onChange={changeHandler}
                   value={form.name}
                 />
-                <label htmlFor="startDate">Select Goal Start Date</label>
+                <br />
+                <label htmlFor="startDate">START DATE: </label>
                 <input
                   type="date"
                   name="startDate"
                   onChange={changeHandler}
                   value={form.startDate}
                 />
-                <label htmlFor="endDate">Select Goal End Date</label>
+                <br />
+                <label htmlFor="endDate">END DATE: </label>
                 <input
                   type="date"
                   name="endDate"
                   onChange={changeHandler}
                   value={form.endDate}
                 />
-                <label htmlFor="activities">
-                  Select Activities to accomplish your goal!
-                </label>
+                <br />
+                <label htmlFor="activities">ADD ACTIVITIES: </label>
                 <input
                   type="enum"
                   placeholder="activities"
@@ -122,9 +123,10 @@ export default function UpdateGoal({
                   onChange={changeHandler}
                   value={form.activities}
                 />
-                <button>Update Goal!</button>
+                <br />
+                <button>Save Changes</button>
               </form>
-              <button onClick={handleRemoveGoal}>Remove</button>
+              <button onClick={handleRemoveGoal}>Remove Goal</button>
             </div>
           )}
 

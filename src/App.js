@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <ActivityContextProvider>
-      <div className="App">
+      <div className="App" style={{width: "90%"}}>
         <Route
           path="/"
           render={(props) => (
