@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NewGoal from "../newGoal/NewGoal";
 import GoalSetting from "../goalSettings/GoalSettings";
 import Activities from "../activities/Activities";
 import CompletedGoals from "../completedGoal/CompletedGoals";
 import Calendar from "../calendar/Calendar";
+import service from "../../utils/service";
 
 export default function DashboardFunction({
   selectedGoal,
@@ -17,6 +18,13 @@ export default function DashboardFunction({
   completedGoals,
   manageCalendar,
 }) {
+  const [activitiesForCalendar, setActivitiesForCalendar] = useState([]);
+  useEffect(() => {
+    service.getCreatedActivitiesFromUser().then((response) => {
+      setActivitiesForCalendar(response.data.createdActivities);
+    });
+  }, []);
+
   const renderFunction = () => {
     // conditional renders components based on props
     if (createGoal) {
@@ -48,7 +56,7 @@ export default function DashboardFunction({
         <>
           {<h1>Complete Activities To Achieve Your Goals</h1>}
           {<h2>Schedule of Activities</h2>}
-          <Calendar completedGoals={completedGoals} />
+          <Calendar activitiesForCalendar={activitiesForCalendar} />
         </>
       );
     } else {

@@ -40,6 +40,8 @@ const service = {
     await axiosInstance.post("/created-activities/create", activity),
   getCreatedActivitiesFromDB: async (goalId) =>
     await axiosInstance.get("/created-activities", goalId),
+  getCreatedActivitiesFromUser: async () =>
+    await axiosInstance.get("/created-activities/user"),
   removeCreatedActivity: async (activityId) =>
     await axiosInstance.post("/created-activities/remove", { activityId }),
 };
