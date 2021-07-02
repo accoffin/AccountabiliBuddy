@@ -15,7 +15,7 @@ export default function UpdateGoal({
   const [details, setDetails] = useState(null);
   // const { activity } = useContext(ActivityContext);
   const [createdActivities, setCreatedActivities] = useState([]);
-  const [ createActivity, setCreateActivity]  = useState(false);
+  const [createActivity, setCreateActivity] = useState(false);
 
   useEffect(() => {
     setDetails(goal);
@@ -30,7 +30,7 @@ export default function UpdateGoal({
     endDate: goal.endDate ? goal.endDate : "",
     activities: goal.activities ? goal.activities : `undefined`,
     achievements: goal.achievements ? goal.achievements : `undefined`,
-    user: goal.user[0],
+    // user: goal.user[0],
     completed: goal.completed,
   });
 
@@ -95,7 +95,6 @@ export default function UpdateGoal({
             <>
               <div>{`Goal settings for ${goal.title}`}</div>
               <h2>{`Name: ${goal.title}`}</h2>
-              <h2 className={"reg"}>{`Activities: `} </h2>
 
               {/* {details.activities.map((activity) => {
                 return <h3 key={activity} className={"reg"} style={{ textTransform: 'uppercase'}}>{activity}</h3>;
@@ -111,10 +110,15 @@ export default function UpdateGoal({
               )}
             </>
           ) : (
-            <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
-            <h2 className={"reg"}>EDIT YOUR GOAL</h2>
+            <div
+              className={"reg"}
+              style={{ marginLeft: "100px", marginTop: "100px" }}
+            >
+              <h2 className={"reg"}>EDIT YOUR GOAL</h2>
               <form onSubmit={submitHandler} id={"formInput"}>
-                <label htmlFor="name" className={"bold-small"}>GOAL NAME: </label>
+                <label htmlFor="name" className={"bold-small"}>
+                  GOAL NAME:{" "}
+                </label>
                 <input
                   type="text"
                   name="title"
@@ -122,7 +126,9 @@ export default function UpdateGoal({
                   value={form.title}
                 />
                 <br />
-                <label htmlFor="startDate" className={"bold-small"}>START DATE: </label>
+                <label htmlFor="startDate" className={"bold-small"}>
+                  START DATE:{" "}
+                </label>
                 <input
                   type="date"
                   name="startDate"
@@ -130,7 +136,9 @@ export default function UpdateGoal({
                   value={form.startDate}
                 />
                 <br />
-                <label htmlFor="endDate" className={"bold-small"}>END DATE: </label>
+                <label htmlFor="endDate" className={"bold-small"}>
+                  END DATE:{" "}
+                </label>
                 <input
                   type="date"
                   name="endDate"
@@ -138,7 +146,9 @@ export default function UpdateGoal({
                   value={form.endDate}
                 />
                 <br />
-                <label htmlFor="activities" className={"bold-small"}>ADD ACTIVITIES: </label>
+                <label htmlFor="activities" className={"bold-small"}>
+                  ADD ACTIVITIES:{" "}
+                </label>
                 <input
                   type="enum"
                   name="activities"

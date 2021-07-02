@@ -149,14 +149,16 @@ export default function Activities({ user }) {
   // };
 
   const inputStyle = {
-    width: "300px", 
-    textAlign: "right" 
-  }
+    width: "300px",
+    textAlign: "right",
+  };
 
   return (
     <>
       <br></br>
-      <h3 id={"h3title"} className={"bold"} style={{marginTop: "100px"}}>MY SAVED ACTIVITIES</h3>
+      <h3 id={"h3title"} className={"bold"} style={{ marginTop: "100px" }}>
+        MY SAVED ACTIVITIES
+      </h3>
       <div id={"saved-activity-main"} className={"reg"}>
         {savedActivities ? (
           <>
@@ -228,22 +230,24 @@ export default function Activities({ user }) {
         <br></br>
       </div>
       <br />
-      <div id={"saved-activity-main"} style={{ width: "400px" }}>
-        {apiResults.length > 0 ? (
-          <Chart
-            width={"700px"}
-            height={"400px"}
-            chartType="PieChart"
-            loader={<div>Loading Chart</div>}
-            data={dataForChart}
-            options={{
-              title: "My Goal Categories",
-            }}
-            rootProps={{ "data-testid": "1" }}
-          />
-        ) : (
-          <p className={"reg"}>Chart Area</p>
-        )}
+      <div id="chart-container">
+        <div id={"saved-activity-main"} style={{ width: "400px" }}>
+          {apiResults.length > 0 ? (
+            <Chart
+              width={"700px"}
+              height={"400px"}
+              chartType="PieChart"
+              loader={<div>Loading Chart</div>}
+              data={dataForChart}
+              options={{
+                title: "My Goal Categories",
+              }}
+              rootProps={{ "data-testid": "1" }}
+            />
+          ) : (
+            <p className={"reg"}>Chart Area</p>
+          )}
+        </div>
       </div>
       <br />
       <h3 className={"bold"}>

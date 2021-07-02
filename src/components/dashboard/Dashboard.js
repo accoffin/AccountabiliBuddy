@@ -5,6 +5,7 @@ import Activities from "../activities/Activities";
 import CompletedGoals from "../completedGoal/CompletedGoals";
 import Calendar from "../calendar/Calendar";
 import service from "../../utils/service";
+import "./Dashboard.css";
 
 export default function DashboardFunction({
   selectedGoal,
@@ -54,8 +55,10 @@ export default function DashboardFunction({
     } else if (manageCalendar) {
       return (
         <>
-          {<h1>Complete Activities To Achieve Your Goals</h1>}
-          {<h2>Schedule of Activities</h2>}
+          <div className={"reg"}>
+            {<h1>Complete Activities To Achieve Your Goals</h1>}
+            {<h2>Schedule of Activities</h2>}
+          </div>
           <Calendar activitiesForCalendar={activitiesForCalendar} />
         </>
       );
@@ -64,9 +67,10 @@ export default function DashboardFunction({
     }
   };
 
+  console.log("completed goals from dash", completedGoals);
   return (
     <>
-      <div>{renderFunction()}</div>
+      <div id="dashboard-main">{renderFunction()}</div>
 
       {/* <savedActivitiesContext.Consumer>
         {(value) =>

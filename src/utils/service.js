@@ -17,6 +17,7 @@ const service = {
   isAuthenticated: async () => await axiosInstance.get("/auth/isAuthenticated"),
   // goals CRUD
   getGoals: async () => await axiosInstance.get("/goals"),
+  getGoalsForPersistantDrawer: async () => await axiosInstance.get("/goals/get"),
   getGoalDetails: async () => await axiosInstance.get("/goals/:goalId"),
   createGoal: async (form) => await axiosInstance.post("/goals/new", form),
   updateGoal: async ({ form, goalId }) =>

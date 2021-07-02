@@ -22,7 +22,7 @@ import Dashboard from "../dashboard/Dashboard";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import ListIcon from "@material-ui/icons/List";
 import DoneIcon from "@material-ui/icons/Done";
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ABlogo from "../../images/logo.png";
 
 // const { google } = require("googleapis");
@@ -100,7 +100,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PersistentDrawer({ user, setUser, history }) {
-
   useEffect(() => {
     if (!user) history.push("/");
     // eslint-disable-next-line
@@ -150,6 +149,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
     const completed = goals.filter((goal) => goal.completed === true);
     setActiveGoals(active);
     setCompletedGoals(completed);
+    console.log("active goals from drawer", activeGoals);
   }, [goals]);
 
   //updates everytime selectedGoal is changed
@@ -172,7 +172,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
     setSelectedGoal(null);
     setManageActivities(false);
     setManageCompletedGoals(false);
-    setManageCalendar(true)
+    setManageCalendar(true);
     history.push("/dashboard", { ...user });
   };
 
@@ -275,7 +275,8 @@ export default function PersistentDrawer({ user, setUser, history }) {
                 <ListItemIcon>
                   <AssignmentTurnedInIcon />
                 </ListItemIcon>
-                <ListItemText disableTypography className={"reg"} primary={goal.title} style={{ textTransform: 'uppercase'}} />
+                {/* <ListItemText disableTypography className={"reg"} primary={goal.title} style={{ textTransform: 'uppercase'}} /> */}
+                <ListItemText primary={goal.title} className={"reg"} style={{ textTransform: 'uppercase'}} disableTypography />
               </ListItem>
             ))
           ) : (

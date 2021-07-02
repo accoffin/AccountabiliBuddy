@@ -1,0 +1,9 @@
+#completed-goals-main{
+    display: flex;
+    flex-direction: column;
+    align-content: center;  
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    font-size: x-large;
+}

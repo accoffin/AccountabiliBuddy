@@ -2,11 +2,11 @@
   border: 8px;
   border-radius: 12px;
   background-color: #afb5de;
-  max-height: 100px;
-  max-width: 450px;
+  height: 200px;
+  width: 300px;
   margin: 10px;
-  width: 30%;
-  height: 30%
+  /* width: 30%;
+  height: 50% */
 }
 
 #activity-main{
@@ -36,4 +36,13 @@ label {
 #formInput {
   text-align: right;
   margin-right: 100px;
+}
+
+#chart-container{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  margin-right: 300px;
 }
