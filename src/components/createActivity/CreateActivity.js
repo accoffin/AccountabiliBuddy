@@ -6,12 +6,15 @@ export default function ActivityDetails({
   setCreatedActivities,
   setCreateActivity,
   user,
+  goal,
+  setAddActivities,
 }) {
   const [form, setForm] = useState({
     title: "",
     start: "",
     end: "",
     description: "",
+    goalId: goal._id,
     user: user._id,
   });
 
@@ -19,10 +22,9 @@ export default function ActivityDetails({
     e.preventDefault();
     await service.saveCreatedActivity(form).then((response) => {
       const allActivities = response.data.createdActivities;
-      console.log("return value from saving created activity", allActivities)
       setCreatedActivities(allActivities);
-      setCreateActivity(false);
     });
+    setAddActivities(false);
   };
 
   const changeHandler = (e) => {
@@ -35,31 +37,15 @@ export default function ActivityDetails({
     <>
       <div className={"reg"}>Enter the details of your activity!</div>
       <br />
-<<<<<<< HEAD:src/components/activityDetails/ActivityDetails.js
-      <form onSubmit={submitHandler}
-      className={"bold-small"} id={"formInput"}>
-        <label htmlFor="name"
-        id={"formInput"}>ACTIVITY NAME: </label>
-=======
       <form onSubmit={submitHandler} className={"reg"}>
         <label htmlFor="title" id={"formInput"}>
           Activity Title:{" "}
         </label>
->>>>>>> origin/master:src/components/createActivity/CreateActivity.js
         <input
           type="text"
           placeholder=""
           name="title"
           onChange={changeHandler}
-<<<<<<< HEAD:src/components/activityDetails/ActivityDetails.js
-          value={form.name}
-          style={{width: "300px"}}
-          
-        />
-        <br />
-        <label htmlFor="state"
-        id={"formInput"}>DESCRIPTION: </label>
-=======
           value={form.title}
           style={{ width: "300px", float: "right" }}
         />
@@ -81,18 +67,13 @@ export default function ActivityDetails({
         <label htmlFor="state" id={"formInput"}>
           Activity Description:{" "}
         </label>
->>>>>>> origin/master:src/components/createActivity/CreateActivity.js
         <input
           type="text"
           placeholder=""
           name="description"
           onChange={changeHandler}
           value={form.description}
-<<<<<<< HEAD:src/components/activityDetails/ActivityDetails.js
-          style={{width: "300px"}}
-=======
           style={{ width: "300px", float: "right" }}
->>>>>>> origin/master:src/components/createActivity/CreateActivity.js
         />
         <br />
         <button>Create Activity!</button>

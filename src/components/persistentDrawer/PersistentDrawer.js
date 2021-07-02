@@ -131,7 +131,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [createGoal, setCreateGoal] = useState(false);
   const [manageActivities, setManageActivities] = useState(false);
-  const [manageCalendar, setManageCalendar] = useState(false);
+  const [manageCalendar, setManageCalendar] = useState(true);
   const [manageCompletedGoals, setManageCompletedGoals] = useState(false);
 
   // goals specific to user
@@ -171,6 +171,7 @@ export default function PersistentDrawer({ user, setUser, history }) {
     setSelectedGoal(null);
     setManageActivities(false);
     setManageCompletedGoals(false);
+    setManageCalendar(true)
     history.push("/dashboard", { ...user });
   };
 

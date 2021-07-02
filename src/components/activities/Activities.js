@@ -21,9 +21,9 @@ export default function Activities({ user }) {
   const { setActivity } = useContext(ActivityContext);
 
   useEffect(() => {
-    service.getCreatedActivitiesFromDB().then((response) => {
-      setCreatedActivities(response.data.createdActivities);
-    });
+    // service.getCreatedActivitiesFromDB().then((response) => {
+    //   setCreatedActivities(response.data.createdActivities);
+    // });
     service.getSavedActivitiesFromAPI().then((response) => {
       setSavedActivities(response.data.activities);
     });
@@ -69,6 +69,7 @@ export default function Activities({ user }) {
   }, [setActivity, savedActivities]);
 
   const handleSelectActivity = (activity) => {
+    console.log("activity data", activity);
     service.saveSelectedActivityFromApi(activity).then((response) => {
       const activitiesFromDB = response.data.activities;
       setSavedActivities([...activitiesFromDB]);
@@ -136,18 +137,23 @@ export default function Activities({ user }) {
     setCreateActivity(true);
   };
 
-  const handleRemoveCreatedActivity = async (activityId) => {
-    console.log("activity id from remove created activity", activityId)
-    await service.removeCreatedActivity(activityId).then((response)=>{
-      setCreatedActivities(response.data.createdActivities);
-      console.log("created activities from removing service call", createdActivities)
-    })
-  };
+  // const handleRemoveCreatedActivity = async (activityId) => {
+  //   console.log("activity id from remove created activity", activityId);
+  //   await service.removeCreatedActivity(activityId).then((response) => {
+  //     setCreatedActivities(response.data.createdActivities);
+  //     console.log(
+  //       "created activities from removing service call",
+  //       createdActivities
+  //     );
+  //   });
+  // };
 
   return (
     <>
       <br></br>
-      <h3 id={"h3title"} className={"bold"}>MY SAVED ACTIVITIES</h3>
+      <h3 id={"h3title"} className={"bold"}>
+        MY SAVED ACTIVITIES
+      </h3>
       <div id={"saved-activity-main"} className={"reg"}>
         {savedActivities ? (
           <>
@@ -159,7 +165,8 @@ export default function Activities({ user }) {
                   onClick={() => handleRemoveActivity(activity)}
                 >
                   <p>{activity.assetName}</p>
-                  <p>{activity.homePageUrlAdr}</p>
+                  <p>{activity.activityStartDate}</p>
+                  <p>{activity.activityEndDate}</p>
                 </div>
               );
             })}
@@ -192,7 +199,7 @@ export default function Activities({ user }) {
           </div>
         )}
         <div>
-          {createdActivities ? (
+          {/* {createdActivities ? (
             <>
               <div id={"saved-activity-main"}>
                 {createdActivities.map((activity) => {
@@ -200,9 +207,7 @@ export default function Activities({ user }) {
                     <div
                       id={"activity-card"}
                       key={activity._id}
-                      onClick={() =>
-                        handleRemoveCreatedActivity(activity._id)
-                      }
+                      onClick={() => handleRemoveCreatedActivity(activity._id)}
                     >
                       <p>{activity.title}</p>
                       <p>{activity.description}</p>
@@ -215,12 +220,12 @@ export default function Activities({ user }) {
             <>
               <p>No created activities.</p>
             </>
-          )}
+          )} */}
         </div>
         <br></br>
       </div>
       <br />
-      <div  id={"saved-activity-main"} style={{width: "400px"}}>
+      <div id={"saved-activity-main"} style={{ width: "400px" }}>
         {apiResults.length > 0 ? (
           <Chart
             width={"700px"}
@@ -246,8 +251,14 @@ export default function Activities({ user }) {
       <div className={"reg"}>
         <div>
           <div id="query-activities-main">
-            <form onSubmit={submitHandler} className={"bold-small"} id={"formInput"}>
-              <label htmlFor="name" id={"formInput"}>CITY: </label>
+            <form
+              onSubmit={submitHandler}
+              className={"bold-small"}
+              id={"formInput"}
+            >
+              <label htmlFor="name" id={"formInput"}>
+                CITY:{" "}
+              </label>
               <input
                 type="text"
                 placeholder=""
@@ -257,7 +268,9 @@ export default function Activities({ user }) {
                 style={{ width: "300px", textAlign: "right" }}
               />
               <br />
-              <label htmlFor="state" id={"formInput"}>STATE: </label>
+              <label htmlFor="state" id={"formInput"}>
+                STATE:{" "}
+              </label>
               <input
                 type="text"
                 placeholder=""
@@ -267,7 +280,9 @@ export default function Activities({ user }) {
                 style={{ width: "300px", textAlign: "right" }}
               />
               <br />
-              <label htmlFor="query" id={"formInput"}>KEYWORDS: </label>
+              <label htmlFor="query" id={"formInput"}>
+                KEYWORDS:{" "}
+              </label>
               <input
                 type="text"
                 placeholder=""

@@ -1,19 +1,26 @@
 import React, { useEffect, useState, useContext } from "react";
 import service from "../../utils/service";
 import { ActivityContext } from "../../TheContext";
+import CreateActivity from "../createActivity/CreateActivity";
 
 export default function UpdateGoal({
   goal,
   handleReturnToDashboard,
   goals,
   setGoals,
+  user,
 }) {
   const [editable, setEditable] = useState(false);
+  const [addActivities, setAddActivities] = useState(false);
   const [details, setDetails] = useState(null);
-  const { activity } = useContext(ActivityContext);
-  console.log("this is activities", activity);
+  // const { activity } = useContext(ActivityContext);
+  const [createdActivities, setCreatedActivities] = useState([]);
+  const [ createActivity, setCreateActivity]  = useState(false);
+
   useEffect(() => {
     setDetails(goal);
+    console.log("goal", goal);
+    setCreatedActivities(goal.created_activities);
     // eslint-disable-next-line
   }, [goal]);
 
@@ -29,6 +36,16 @@ export default function UpdateGoal({
 
   const handleEdit = () => {
     setEditable(!editable);
+  };
+
+  const handleAddActivities = () => {
+    setAddActivities(!addActivities);
+  };
+
+  const handleRemoveCreatedActivity = async (activityId) => {
+    await service.removeCreatedActivity(activityId).then((response) => {
+      setCreatedActivities(response.data.createdActivities);
+    });
   };
 
   const handleComplete = () => {
@@ -70,26 +87,30 @@ export default function UpdateGoal({
   return (
     <>
       {details && (
-        <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
+        <div
+          className={"reg"}
+          style={{ marginLeft: "100px", marginTop: "100px" }}
+        >
           {!editable ? (
             <>
-              <div>{`Goal settings for ${details.title} ${activity}`}</div>
+              <div>{`Goal settings for ${details.title}`}</div>
               <h2>{`Name: ${details.title}`}</h2>
-              <h2 className={"reg"}>{`Activities: `} </h2>
-              {details.activities.map((activity) => {
-                return <h3 key={activity} className={"reg"} style={{ textTransform: 'uppercase'}}>{activity}</h3>;
-              })}
+
               {goal.completed ? (
                 <h1>Goal Complete!</h1>
               ) : (
                 <>
                   <button onClick={handleEdit}>Edit Goal</button>
+                  <button onClick={handleAddActivities}>Add Activities</button>
                   <button onClick={handleComplete}>Mark as Complete!</button>
                 </>
               )}
             </>
           ) : (
-            <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
+            <div
+              className={"reg"}
+              style={{ marginLeft: "100px", marginTop: "100px" }}
+            >
               <form onSubmit={submitHandler}>
                 <label htmlFor="name">GOAL NAME: </label>
                 <input
@@ -116,21 +137,51 @@ export default function UpdateGoal({
                   value={form.endDate}
                 />
                 <br />
-                <label htmlFor="activities">ADD ACTIVITIES: </label>
-                <input
-                  type="enum"
-                  placeholder="activities"
-                  name="activities"
-                  onChange={changeHandler}
-                  value={form.activities}
-                />
                 <br />
                 <button>Save Changes</button>
               </form>
               <button onClick={handleRemoveGoal}>Remove Goal</button>
             </div>
           )}
-
+          <h2 className={"reg"}>{`Activities: `} </h2>
+          <br></br>
+          {addActivities && (
+            <CreateActivity
+              setCreatedActivities={setCreatedActivities}
+              setCreateActivity={setCreateActivity}
+              setAddActivities={setAddActivities}
+              user={user}
+              goal={goal}
+            />
+          )}
+          <div>
+            {createdActivities ? (
+              <>
+                <div id={"saved-activity-main"}>
+                  {createdActivities.map((activity) => {
+                    return (
+                      <div
+                        id={"activity-card"}
+                        key={activity._id}
+                        onClick={() =>
+                          handleRemoveCreatedActivity(activity._id)
+                        }
+                      >
+                        <p>{activity.title}</p>
+                        <p>{activity.description}</p>
+                        <p>{activity.start}</p>
+                        <p>{activity.end}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            ) : (
+              <>
+                <p>No created activities.</p>
+              </>
+            )}
+          </div>
           <div
             style={{ display: "flex", width: "100%", justifyContent: "center" }}
           ></div>

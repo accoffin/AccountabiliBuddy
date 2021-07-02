@@ -38,8 +38,8 @@ const service = {
   // user created activities CRUD
   saveCreatedActivity: async (activity) =>
     await axiosInstance.post("/created-activities/create", activity),
-  getCreatedActivitiesFromDB: async () =>
-    await axiosInstance.get("/created-activities"),
+  getCreatedActivitiesFromDB: async (goalId) =>
+    await axiosInstance.get("/created-activities", goalId),
   removeCreatedActivity: async (activityId) =>
     await axiosInstance.post("/created-activities/remove", { activityId }),
 };

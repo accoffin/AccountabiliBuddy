@@ -2,19 +2,25 @@ import React from "react";
 
 export default function CompletedGoals({ completedGoals }) {
   const topStyle = {
-    marginTop: '80px',
-    fontFamily: 'raleway'
-  }
+    marginTop: "80px",
+    fontFamily: "raleway",
+  };
   const bodyStyle = {
-    fontFamily: 'raleway',
+    fontFamily: "raleway",
     fontSize: 14,
-  }
+  };
 
   return (
     <>
-      <h2 className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>Completed Goals!</h2>
+      <h2 className={"reg"} style={{ marginLeft: "100px", marginTop: "100px" }}>
+        Completed Goals!
+      </h2>
       {completedGoals.map((goal) => {
-        return <h3 key={goal._id} style={bodyStyle}>{goal.name}</h3>;
+        return (
+          <h3 key={goal._id} style={bodyStyle}>
+            {goal.name}
+          </h3>
+        );
       })}
     </>
   );

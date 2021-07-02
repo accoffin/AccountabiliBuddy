@@ -42,10 +42,10 @@ export default function NewGoal({ user, handleReturnToDashboard, setGoals }) {
           />
           <br />
           <label htmlFor="startDate">START DATE: </label>
-          <input type="date" name="startDate" onChange={changeHandler} />
+          <input type="date" name="start" onChange={changeHandler} />
           <br />
           <label htmlFor="endDate">END DATE: </label>
-          <input type="date" name="endDate" onChange={changeHandler} />
+          <input type="date" name="end" onChange={changeHandler} />
           <button>Create Goal!</button>
         </form>
       </div>

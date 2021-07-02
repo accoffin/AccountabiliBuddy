@@ -40,11 +40,17 @@ export default function DashboardFunction({
         </>
       );
     } else if (manageActivities) {
-      return <Activities user={user}/>;
+      return <Activities user={user} />;
     } else if (manageCompletedGoals) {
       return <CompletedGoals completedGoals={completedGoals} />;
     } else if (manageCalendar) {
-      return <Calendar completedGoals={completedGoals} />;
+      return (
+        <>
+          {<h1>Complete Activities To Achieve Your Goals</h1>}
+          {<h2>Schedule of Activities</h2>}
+          <Calendar completedGoals={completedGoals} />
+        </>
+      );
     } else {
       return <h3>{"Click Hamburger Menu To Begin!"}</h3>;
     }
