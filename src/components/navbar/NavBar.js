@@ -13,7 +13,7 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <div className={"navbar"}>
+      <div>
         {/* <ul className={"bold-small"}>
           <Link to="/" >
             <li>HOME</li>

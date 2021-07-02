@@ -148,12 +148,15 @@ export default function Activities({ user }) {
   //   });
   // };
 
+  const inputStyle = {
+    width: "300px", 
+    textAlign: "right" 
+  }
+
   return (
     <>
       <br></br>
-      <h3 id={"h3title"} className={"bold"}>
-        MY SAVED ACTIVITIES
-      </h3>
+      <h3 id={"h3title"} className={"bold"} style={{marginTop: "100px"}}>MY SAVED ACTIVITIES</h3>
       <div id={"saved-activity-main"} className={"reg"}>
         {savedActivities ? (
           <>
@@ -184,7 +187,7 @@ export default function Activities({ user }) {
         </h3>
         <hr />
         <br></br>
-        {createActivity ? (
+        {/* {createActivity ? (
           <CreateActivity
             setCreatedActivities={setCreatedActivities}
             setCreateActivity={setCreateActivity}
@@ -197,7 +200,7 @@ export default function Activities({ user }) {
               Create Activity
             </button>
           </div>
-        )}
+        )} */}
         <div>
           {/* {createdActivities ? (
             <>
@@ -218,7 +221,7 @@ export default function Activities({ user }) {
             </>
           ) : (
             <>
-              <p>No created activities.</p>
+              <p className={"reg"}>You have no created activities</p>
             </>
           )} */}
         </div>
@@ -239,7 +242,7 @@ export default function Activities({ user }) {
             rootProps={{ "data-testid": "1" }}
           />
         ) : (
-          <p>Chart Area</p>
+          <p className={"reg"}>Chart Area</p>
         )}
       </div>
       <br />
@@ -261,11 +264,10 @@ export default function Activities({ user }) {
               </label>
               <input
                 type="text"
-                placeholder=""
                 name="city"
                 onChange={changeHandler}
                 value={form.city}
-                style={{ width: "300px", textAlign: "right" }}
+                style={inputStyle}
               />
               <br />
               <label htmlFor="state" id={"formInput"}>
@@ -273,11 +275,10 @@ export default function Activities({ user }) {
               </label>
               <input
                 type="text"
-                placeholder=""
                 name="state"
                 onChange={changeHandler}
                 value={form.state}
-                style={{ width: "300px", textAlign: "right" }}
+                style={inputStyle}
               />
               <br />
               <label htmlFor="query" id={"formInput"}>
@@ -285,14 +286,13 @@ export default function Activities({ user }) {
               </label>
               <input
                 type="text"
-                placeholder=""
                 name="query"
                 onChange={changeHandler}
                 value={form.query}
-                style={{ width: "300px", textAlign: "right" }}
+                style={inputStyle}
               />
               <br />
-              <button>Search Activities!</button>
+              <button>Search Activities</button>
             </form>
           </div>
         </div>

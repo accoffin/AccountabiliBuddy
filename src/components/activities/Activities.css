@@ -5,7 +5,8 @@
   max-height: 100px;
   max-width: 450px;
   margin: 10px;
-  width: 30%
+  width: 30%;
+  height: 30%
 }
 
 #activity-main{
@@ -30,4 +31,9 @@
 
 label {
   margin-left: 20px
+}
+
+#formInput {
+  text-align: right;
+  margin-right: 100px;
 }

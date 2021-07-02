@@ -1,10 +1,6 @@
 import React from "react";
 
 export default function CompletedGoals({ completedGoals }) {
-  const topStyle = {
-    marginTop: "80px",
-    fontFamily: "raleway",
-  };
   const bodyStyle = {
     fontFamily: "raleway",
     fontSize: 14,

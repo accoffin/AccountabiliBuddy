@@ -33,50 +33,55 @@ export default function ActivityDetails({
     setForm({ ...form, [name]: value });
   };
 
+  const inputStyle = {
+    width: "300px", 
+    textAlign: "right" 
+  }
+
   return (
     <>
       <div className={"reg"}>Enter the details of your activity!</div>
       <br />
-      <form onSubmit={submitHandler} className={"reg"}>
-        <label htmlFor="title" id={"formInput"}>
-          Activity Title:{" "}
+      <form onSubmit={submitHandler} id={"formInput"}>
+        <label htmlFor="title" id={"formInput"} className={"bold-small"}>
+          ACTIVITY TITLE:{" "}
         </label>
         <input
           type="text"
-          placeholder=""
           name="title"
           onChange={changeHandler}
           value={form.title}
-          style={{ width: "300px", float: "right" }}
+          style={inputStyle}
         />
         <br />
-        <label htmlFor="startDate">Select Activity Start Date</label>
+        <label htmlFor="start" id={"formInput"} className={"bold-small"}>START DATE:</label>
         <input
           type="date"
           name="start"
           onChange={changeHandler}
           value={form.start}
+          style={inputStyle}
         />
-        <label htmlFor="end">Select Activity End Date</label>
+        <br />
+        <label htmlFor="end" id={"formInput"} className={"bold-small"}>END DATE:</label>
         <input
           type="date"
           name="end"
           onChange={changeHandler}
           value={form.end}
+          style={inputStyle}
         />
-        <label htmlFor="state" id={"formInput"}>
-          Activity Description:{" "}
-        </label>
+        <br />
+        <label htmlFor="state" id={"formInput"} className={"bold-small"}>DESCRIPTION:{" "}</label>
         <input
           type="text"
-          placeholder=""
           name="description"
           onChange={changeHandler}
           value={form.description}
-          style={{ width: "300px", float: "right" }}
+          style={inputStyle}
         />
         <br />
-        <button>Create Activity!</button>
+        <button>Create Activity</button>
       </form>
     </>
   );

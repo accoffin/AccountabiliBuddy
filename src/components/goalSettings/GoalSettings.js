@@ -93,9 +93,13 @@ export default function UpdateGoal({
         >
           {!editable ? (
             <>
-              <div>{`Goal settings for ${details.title}`}</div>
-              <h2>{`Name: ${details.title}`}</h2>
+              <div>{`Goal settings for ${goal.title}`}</div>
+              <h2>{`Name: ${goal.title}`}</h2>
+              <h2 className={"reg"}>{`Activities: `} </h2>
 
+              {/* {details.activities.map((activity) => {
+                return <h3 key={activity} className={"reg"} style={{ textTransform: 'uppercase'}}>{activity}</h3>;
+              })} */}
               {goal.completed ? (
                 <h1>Goal Complete!</h1>
               ) : (
@@ -107,21 +111,18 @@ export default function UpdateGoal({
               )}
             </>
           ) : (
-            <div
-              className={"reg"}
-              style={{ marginLeft: "100px", marginTop: "100px" }}
-            >
-              <form onSubmit={submitHandler}>
-                <label htmlFor="name">GOAL NAME: </label>
+            <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
+            <h2 className={"reg"}>EDIT YOUR GOAL</h2>
+              <form onSubmit={submitHandler} id={"formInput"}>
+                <label htmlFor="name" className={"bold-small"}>GOAL NAME: </label>
                 <input
                   type="text"
-                  placeholder="Name of goal"
-                  name="name"
+                  name="title"
                   onChange={changeHandler}
                   value={form.title}
                 />
                 <br />
-                <label htmlFor="startDate">START DATE: </label>
+                <label htmlFor="startDate" className={"bold-small"}>START DATE: </label>
                 <input
                   type="date"
                   name="startDate"
@@ -129,7 +130,7 @@ export default function UpdateGoal({
                   value={form.startDate}
                 />
                 <br />
-                <label htmlFor="endDate">END DATE: </label>
+                <label htmlFor="endDate" className={"bold-small"}>END DATE: </label>
                 <input
                   type="date"
                   name="endDate"
@@ -137,6 +138,13 @@ export default function UpdateGoal({
                   value={form.endDate}
                 />
                 <br />
+                <label htmlFor="activities" className={"bold-small"}>ADD ACTIVITIES: </label>
+                <input
+                  type="enum"
+                  name="activities"
+                  onChange={changeHandler}
+                  value={form.activities}
+                />
                 <br />
                 <button>Save Changes</button>
               </form>
