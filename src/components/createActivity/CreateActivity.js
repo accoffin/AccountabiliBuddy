@@ -31,6 +31,11 @@ export default function ActivityDetails({
     setForm({ ...form, [name]: value });
   };
 
+  const inputStyle = {
+    width: "300px", 
+    textAlign: "right" 
+  }
+
   return (
     <>
       <div className={"reg"}>Enter the details of your activity!</div>
@@ -44,7 +49,7 @@ export default function ActivityDetails({
           name="title"
           onChange={changeHandler}
           value={form.title}
-          style={{ width: "300px", textAlign: "right" }}
+          style={inputStyle}
         />
         <br />
         <label htmlFor="start" id={"formInput"} className={"bold-small"}>START DATE:</label>
@@ -53,7 +58,7 @@ export default function ActivityDetails({
           name="start"
           onChange={changeHandler}
           value={form.start}
-          style={{ width: "300px", textAlign: "right" }}
+          style={inputStyle}
         />
         <br />
         <label htmlFor="end" id={"formInput"} className={"bold-small"}>END DATE:</label>
@@ -62,7 +67,7 @@ export default function ActivityDetails({
           name="end"
           onChange={changeHandler}
           value={form.end}
-          style={{ width: "300px", textAlign: "right" }}
+          style={inputStyle}
         />
         <br />
         <label htmlFor="state" id={"formInput"} className={"bold-small"}>DESCRIPTION:{" "}</label>
@@ -71,7 +76,7 @@ export default function ActivityDetails({
           name="description"
           onChange={changeHandler}
           value={form.description}
-          style={{ width: "300px", textAlign: "right" }}
+          style={inputStyle}
         />
         <br />
         <button>Create Activity</button>

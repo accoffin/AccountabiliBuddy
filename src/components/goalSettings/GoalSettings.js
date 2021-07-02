@@ -90,8 +90,9 @@ export default function UpdateGoal({
             </>
           ) : (
             <div className={"reg"} style={{marginLeft: "100px", marginTop: "100px"}}>
-              <form onSubmit={submitHandler}>
-                <label htmlFor="name">GOAL NAME: </label>
+            <h2 className={"reg"}>EDIT YOUR GOAL</h2>
+              <form onSubmit={submitHandler} id={"formInput"}>
+                <label htmlFor="name" className={"bold-small"}>GOAL NAME: </label>
                 <input
                   type="text"
                   name="title"
@@ -99,7 +100,7 @@ export default function UpdateGoal({
                   value={form.title}
                 />
                 <br />
-                <label htmlFor="startDate">START DATE: </label>
+                <label htmlFor="startDate" className={"bold-small"}>START DATE: </label>
                 <input
                   type="date"
                   name="startDate"
@@ -107,7 +108,7 @@ export default function UpdateGoal({
                   value={form.startDate}
                 />
                 <br />
-                <label htmlFor="endDate">END DATE: </label>
+                <label htmlFor="endDate" className={"bold-small"}>END DATE: </label>
                 <input
                   type="date"
                   name="endDate"
@@ -115,7 +116,7 @@ export default function UpdateGoal({
                   value={form.endDate}
                 />
                 <br />
-                <label htmlFor="activities">ADD ACTIVITIES: </label>
+                <label htmlFor="activities" className={"bold-small"}>ADD ACTIVITIES: </label>
                 <input
                   type="enum"
                   name="activities"
@@ -128,10 +129,6 @@ export default function UpdateGoal({
               <button onClick={handleRemoveGoal}>Remove Goal</button>
             </div>
           )}
-
-          <div
-            style={{ display: "flex", width: "100%", justifyContent: "center" }}
-          ></div>
         </div>
       )}
     </>

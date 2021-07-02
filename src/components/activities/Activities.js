@@ -144,6 +144,11 @@ export default function Activities({ user }) {
     })
   };
 
+  const inputStyle = {
+    width: "300px", 
+    textAlign: "right" 
+  }
+
   return (
     <>
       <br></br>
@@ -213,7 +218,7 @@ export default function Activities({ user }) {
             </>
           ) : (
             <>
-              <p>No created activities.</p>
+              <p className={"reg"}>You have no created activities</p>
             </>
           )}
         </div>
@@ -234,7 +239,7 @@ export default function Activities({ user }) {
             rootProps={{ "data-testid": "1" }}
           />
         ) : (
-          <p>Chart Area</p>
+          <p className={"reg"}>Chart Area</p>
         )}
       </div>
       <br />
@@ -253,27 +258,25 @@ export default function Activities({ user }) {
                 name="city"
                 onChange={changeHandler}
                 value={form.city}
-                style={{ width: "300px", textAlign: "right" }}
+                style={inputStyle}
               />
               <br />
               <label htmlFor="state" id={"formInput"}>STATE: </label>
               <input
                 type="text"
-                placeholder=""
                 name="state"
                 onChange={changeHandler}
                 value={form.state}
-                style={{ width: "300px", textAlign: "right" }}
+                style={inputStyle}
               />
               <br />
               <label htmlFor="query" id={"formInput"}>KEYWORDS: </label>
               <input
                 type="text"
-                placeholder=""
                 name="query"
                 onChange={changeHandler}
                 value={form.query}
-                style={{ width: "300px", textAlign: "right" }}
+                style={inputStyle}
               />
               <br />
               <button>Search Activities</button>
